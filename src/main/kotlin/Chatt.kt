@@ -16,13 +16,13 @@ class Chatt {
 
     fun sendMessage(message : String, sender : Player){
         val players : List<Player> = getPlayersInRange(sender)
-        val assmbledMessage : String = assembleMessage(message, sender)
+        val assembledMessage : String = assembleMessage(message, sender)
 
         if (ignoreWorld) {
-            Bukkit.getServer().broadcastMessage(assmbledMessage)
+            Bukkit.getServer().broadcastMessage(assembledMessage)
         } else {
             for (player in players){
-                player.sendMessage(message)
+                player.sendMessage(assembledMessage)
             }
         }
     }
