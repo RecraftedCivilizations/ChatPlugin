@@ -27,5 +27,6 @@ class DataParser(main: Main) {
         for (entry : String in data.keys) {
             config.set(key, data[key])
         }
+        config.save(dataFile)
     }
 }
