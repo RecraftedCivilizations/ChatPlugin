@@ -21,4 +21,11 @@ class DataParser(main: Main) {
 
         return playerChatData
     }
+
+    fun writeDataMap(data : Map<String, String>, key : String){
+        val config : YamlConfiguration = YamlConfiguration.loadConfiguration(dataFile)
+        for (entry : String in data.keys) {
+            config.set(key, data[key])
+        }
+    }
 }
