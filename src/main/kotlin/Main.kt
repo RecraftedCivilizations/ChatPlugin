@@ -6,20 +6,20 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
-import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
-    val parser : configParser = configParser(this)
-    var chats : MutableList<Chatt> = mutableListOf()
+    private val parser : configParser = configParser(this)
+    private var chats : MutableList<Chatt> = mutableListOf()
+
 
     override fun onEnable(){
         saveDefaultConfig()
-        val f : File = File(dataFolder.toString() + "data.yml")
+        val f = File(dataFolder.toString() + "data.yml")
         if (!f.exists()){
             val isCreated : Boolean = f.createNewFile()
-            if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder.toString()}data.yml")
+            if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}data.yml")
         }
 
         // Create chat obj for every chat defined in the config file

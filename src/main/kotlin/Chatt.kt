@@ -2,12 +2,11 @@ package com.github.DarkVanityOfLight.ChattPlugin
 
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
-import kotlin.properties.Delegates
 
 class Chatt {
-    lateinit var format: String
-    var radius : Int = 0
-    var ignoreWorld = true
+    private var format: String
+    private var radius : Int = 0
+    private var ignoreWorld = true
 
     constructor(name : String, list_style : String, ignoreWorld : Boolean, format : String, muteable : Boolean, radius : Int){
         this.format = format

@@ -1,7 +1,6 @@
 package com.github.DarkVanityOfLight.ChattPlugin.config
 
 import com.github.DarkVanityOfLight.ChattPlugin.Main
-import org.bukkit.Bukkit
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
