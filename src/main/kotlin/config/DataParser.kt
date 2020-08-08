@@ -9,14 +9,14 @@ import java.io.File
 class DataParser(main: Main) {
     var dataFile : File = File(main.dataFolder.toString() + "data.yml")
 
-    fun readData() : Map<String, String> {
+    fun readDataMap(key: String) : Map<String, String> {
         val config : YamlConfiguration = YamlConfiguration.loadConfiguration(dataFile)
         val playerChatData : MutableMap<String, String> = emptyMap<String, String>().toMutableMap()
-        val configSection : ConfigurationSection? = config.getConfigurationSection("PlayerChatData")
+        val configSection : ConfigurationSection? = config.getConfigurationSection(key)
 
         if (configSection != null)
-            for (key : String in configSection.getKeys(false)){
-                playerChatData[key] = configSection.getString("PlayerChatData $key").toString()
+            for (dataKey : String in configSection.getKeys(false)){
+                playerChatData[key] = configSection.getString(key + dataKey).toString()
             }
 
         return playerChatData
