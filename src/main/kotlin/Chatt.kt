@@ -35,6 +35,14 @@ class Chatt {
     }
 
     private fun getPlayersInRange(sender: Player) : List<Player>{
+        var players = mutableListOf<Player>()
 
+        for (player in Bukkit.getOnlinePlayers()){
+            if (player.location.distance(sender.location <= this.radius)){
+                players.add(player)
+            }
+        }
+
+        return players
     }
 }
