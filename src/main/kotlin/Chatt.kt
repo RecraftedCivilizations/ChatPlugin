@@ -33,14 +33,14 @@ class Chatt {
     }
 
     private fun assembleMessage(message: String, player : Player) : String{
-        var form = format
+        val form = format
         form.replace("%player_name%", player.name)
         form.replace("%message%", message)
         return form
     }
 
     private fun getPlayersInRange(sender: Player) : List<Player>{
-        var players = mutableListOf<Player>()
+        val players = mutableListOf<Player>()
 
         for (player in Bukkit.getOnlinePlayers()){
             if (player.location.distance(sender.location) <= this.radius){
