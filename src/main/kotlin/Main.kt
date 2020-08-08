@@ -1,7 +1,7 @@
 package com.github.DarkVanityOfLight.ChattPlugin
 
 import com.github.DarkVanityOfLight.ChattPlugin.config.DataParser
-import com.github.DarkVanityOfLight.ChattPlugin.config.configParser
+import com.github.DarkVanityOfLight.ChattPlugin.config.ConfigParser
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
 import org.bukkit.event.EventHandler
@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
-    private val parser : configParser = configParser(this)
+    private val parser : ConfigParser = ConfigParser(this)
     val chats : MutableMap<String, Chatt> = emptyMap<String, Chatt>().toMutableMap()
     lateinit var dataParser : DataParser
 
