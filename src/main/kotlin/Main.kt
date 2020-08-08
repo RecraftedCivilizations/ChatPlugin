@@ -33,6 +33,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         }
         // Load the config
         config = YamlConfiguration.loadConfiguration(f)
+        parser.read()
 
         // Check if data file exists if not create
         f = File(dataFolder.toString() + "data.yml")

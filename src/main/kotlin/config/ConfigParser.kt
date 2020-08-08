@@ -8,11 +8,7 @@ class ConfigParser(private val main: Main) {
     lateinit var chatProperties : Map<String, Map<String, Any>>
     lateinit var defaultChannel : String
 
-    init {
-        read()
-    }
-
-    private fun read(){
+    fun read(){
         chats = main.config.getList("Channels") as List<String>
 
         for (chat in chats){
