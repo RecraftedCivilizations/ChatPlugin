@@ -1,10 +1,12 @@
 package com.github.DarkVanityOfLight.ChattPlugin.config
 
 import com.github.DarkVanityOfLight.ChattPlugin.Main
+import org.bukkit.Bukkit
 
 class ConfigParser(private val main: Main) {
     lateinit var chats: List<String>
     lateinit var chatProperties : Map<String, Map<String, Any>>
+    lateinit var defaultChannel : String
 
     init {
         read()
@@ -23,6 +25,12 @@ class ConfigParser(private val main: Main) {
             chatProperties = mapOf(Pair(chat, properties))
         }
 
+        if (main.config.getString("defaultChannel") != null) {
+            defaultChannel = main.config.getString("defaultChannel")!!
+
+        }else {
+            Bukkit.getLogger().warning("You did not define a default channel")
+        }
     }
 
 }

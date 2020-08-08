@@ -9,7 +9,9 @@ import org.bukkit.command.CommandMap
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
+import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.java.JavaPlugin
+import sun.audio.AudioPlayer.player
 import java.io.File
 import java.lang.reflect.Field
 
@@ -69,5 +71,12 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         }
 
         chat.sendMessage(event.message, event.player)
+    }
+
+    @EventHandler
+    fun onJoin(event: PlayerJoinEvent){
+        if (event.player.name !in dataParser.playerChannelMap.keys){
+            dataParser.setData(player.name, parser.defaultChannel)
+        }
     }
 }
