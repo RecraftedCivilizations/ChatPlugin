@@ -6,6 +6,7 @@ import com.github.DarkVanityOfLight.ChattPlugin.config.DataParser
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandMap
+import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
@@ -19,11 +20,22 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     private val parser : ConfigParser = ConfigParser(this)
     val chats : MutableMap<String, Chatt> = emptyMap<String, Chatt>().toMutableMap()
     lateinit var dataParser : DataParser
-
+    lateinit var config : YamlConfiguration
 
     override fun onEnable(){
-        saveDefaultConfig()
-        val f = File(dataFolder.toString() + "data.yml")
+
+        // Check if config file exists if not create
+        var f = File(dataFolder.toString() + "config.yml")
+        if (!f.exists()){
+            val isCreated : Boolean = f.createNewFile()
+            if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}config.yml")
+            Bukkit.getLogger().info("Config file for ChatPlugin is empty please define something in it and reload")
+        }
+        // Load the config
+        config = YamlConfiguration.loadConfiguration(f)
+
+        // Check if data file exists if not create
+        f = File(dataFolder.toString() + "data.yml")
         if (!f.exists()){
             val isCreated : Boolean = f.createNewFile()
             if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}data.yml")
