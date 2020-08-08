@@ -1,5 +1,6 @@
 package com.github.DarkVanityOfLight.ChattPlugin
 
+import com.github.DarkVanityOfLight.ChattPlugin.config.DataParser
 import com.github.DarkVanityOfLight.ChattPlugin.config.configParser
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
@@ -11,7 +12,8 @@ import java.io.File
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
     private val parser : configParser = configParser(this)
-    private var chats : MutableList<Chatt> = mutableListOf()
+    private val chats : MutableMap<String, Chatt> = emptyMap<String, Chatt>().toMutableMap()
+    private lateinit var dataParser : DataParser
 
 
     override fun onEnable(){
@@ -21,13 +23,14 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
             val isCreated : Boolean = f.createNewFile()
             if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}data.yml")
         }
+        dataParser = DataParser(this)
 
         // Create chat obj for every chat defined in the config file
-        for ((index, channel) in parser.chats.withIndex()) {
+        for (channel in parser.chats) {
             val properties = parser.chatProperties[channel]
             if (properties != null) {
                 if ("ignoreWorld" in properties.keys){
-                    chats[index] = Chatt(
+                    chats[channel] = Chatt(
                             properties[name] as String, properties["list_style"] as String,
                             properties["ignoreWorld"] as Boolean, properties["format"] as String,
                             properties["muteable"] as Boolean, properties["radius"] as Int)
@@ -40,7 +43,16 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
 
     @EventHandler
     fun onMessage(event: AsyncPlayerChatEvent){
-        val msg = event.message
-        event.isCancelled = true
+        dataParser.updatePlayerChannelMap()
+        val channel = dataParser.playerChannelMap[event.player.name]
+        val chat : Chatt? = chats[channel]
+        if (chat == null){
+            Bukkit.getLogger().warning("No channel with the name $channel could be found," +
+                    " but was requested by player ${event.player.name}")
+            event.isCancelled = true
+            return
+        }
+
+        chat.sendMessage(event.message, event.player)
     }
 }
