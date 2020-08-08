@@ -15,8 +15,8 @@ class Chatt {
     constructor(name: String, list_style: String, format: String, muteable: Boolean){}
 
     fun sendMessage(message : String, sender : Player){
-        var players : List<Player> = getPlayersInRange(sender)
-        var assmbledMessage : String = assembleMessage(message, sender)
+        val players : List<Player> = getPlayersInRange(sender)
+        val assmbledMessage : String = assembleMessage(message, sender)
 
         if (ignoreWorld) {
             Bukkit.getServer().broadcastMessage(assmbledMessage)
