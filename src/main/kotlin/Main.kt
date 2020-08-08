@@ -1,14 +1,17 @@
 package com.github.DarkVanityOfLight.ChattPlugin
 
-import com.github.DarkVanityOfLight.ChattPlugin.config.DataParser
+import com.github.DarkVanityOfLight.ChattPlugin.commands.SwitchChannel
 import com.github.DarkVanityOfLight.ChattPlugin.config.ConfigParser
+import com.github.DarkVanityOfLight.ChattPlugin.config.DataParser
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
+import org.bukkit.command.CommandMap
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
+import java.lang.reflect.Field
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
     private val parser : ConfigParser = ConfigParser(this)
@@ -34,6 +37,18 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
                             properties[name] as String, properties["list_style"] as String,
                             properties["ignoreWorld"] as Boolean, properties["format"] as String,
                             properties["muteable"] as Boolean, properties["radius"] as Int)
+                }
+                // Register our commands without plugin.yml
+                try {
+                    val bukkitCommandMap: Field = Bukkit.getServer().javaClass.getDeclaredField("commandMap")
+                    bukkitCommandMap.setAccessible(true)
+                    val commandMap: CommandMap = bukkitCommandMap.get(Bukkit.getServer()) as CommandMap
+                    commandMap.register(channel, SwitchChannel(
+                            channel, properties["list_style"] as String, "/$channel",
+                            "chatPlugin.commands.switchChannel", ArrayList<String>(), this
+                            ))
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
         }
