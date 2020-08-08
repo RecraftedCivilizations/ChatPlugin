@@ -28,7 +28,10 @@ class Chatt {
     }
 
     private fun assembleMessage(message: String, player : Player) : String{
+        var form = format
+        form.replace("%player_name%", player.name)
 
+        return form
     }
 
     private fun getPlayersInRange(sender: Player) : List<Player>{
