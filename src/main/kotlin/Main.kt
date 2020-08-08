@@ -12,8 +12,8 @@ import java.io.File
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
     private val parser : configParser = configParser(this)
-    private val chats : MutableMap<String, Chatt> = emptyMap<String, Chatt>().toMutableMap()
-    private lateinit var dataParser : DataParser
+    val chats : MutableMap<String, Chatt> = emptyMap<String, Chatt>().toMutableMap()
+    lateinit var dataParser : DataParser
 
 
     override fun onEnable(){

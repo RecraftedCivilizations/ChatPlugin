@@ -33,4 +33,10 @@ class DataParser(main: Main) {
         }
         config.save(dataFile)
     }
+
+    fun setData(key: String, value : Any){
+        val config : YamlConfiguration = YamlConfiguration.loadConfiguration(dataFile)
+        config.set(key, value)
+        config.save(dataFile)
+    }
 }
