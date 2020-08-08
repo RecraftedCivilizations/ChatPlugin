@@ -12,7 +12,7 @@ import java.io.File
 class Main : JavaPlugin(), Listener, CommandExecutor{
 
     override fun onEnable(){
-
+        saveDefaultConfig()
         val f : File = File(dataFolder.toString() + "data.yml")
         if (!f.exists()){
             val isCreated : Boolean = f.createNewFile()
