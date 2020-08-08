@@ -6,13 +6,18 @@ import kotlin.properties.Delegates
 
 class Chatt {
     lateinit var format: String
+    var radius : Int = 0
     var ignoreWorld = true
 
-    constructor(name : String, list_style : String, ignoreWorld : Boolean, format : String, muteable : Boolean){
+    constructor(name : String, list_style : String, ignoreWorld : Boolean, format : String, muteable : Boolean, radius : Int){
         this.format = format
         this.ignoreWorld = ignoreWorld
+        this.radius = radius
     }
-    constructor(name: String, list_style: String, format: String, muteable: Boolean){}
+    constructor(name: String, list_style: String, format: String, muteable: Boolean, radius: Int){
+        this.radius = radius
+        this.format = format
+    }
 
     fun sendMessage(message : String, sender : Player){
         val players : List<Player> = getPlayersInRange(sender)
