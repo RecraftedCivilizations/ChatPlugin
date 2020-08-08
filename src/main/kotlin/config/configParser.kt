@@ -2,7 +2,7 @@ package com.github.DarkVanityOfLight.ChattPlugin.config
 
 import com.github.DarkVanityOfLight.ChattPlugin.Main
 
-class configParser(val main: Main) {
+class configParser(private val main: Main) {
     lateinit var chats: List<String>
     lateinit var chatProperties : Map<String, Map<String, Any>>
 
