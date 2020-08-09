@@ -10,13 +10,10 @@ class ConfigParser(private val main: Main) {
     lateinit var defaultChannel : String
     lateinit var config : FileConfiguration
 
-    init {
+    fun read(){
         main.saveDefaultConfig()
         main.reloadConfig()
 
-    }
-
-    fun read(){
         config = main.getConfig()
 
         chats = config.getList("Channels") as List<String>
