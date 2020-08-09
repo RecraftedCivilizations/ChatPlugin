@@ -23,7 +23,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     override fun onEnable(){
 
         // Check if config file exists if not create
-        var f = File(dataFolder.toString() + "/config.yml")
+        var f = File("$dataFolder/config.yml")
         if (!f.exists()){
             val isCreated : Boolean = f.createNewFile()
             if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}/config.yml")
@@ -31,7 +31,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         }
 
         // Check if data file exists if not create
-        f = File(dataFolder.toString() + "/data.yml")
+        f = File("$dataFolder/data.yml")
         if (!f.exists()){
             val isCreated : Boolean = f.createNewFile()
             if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}/data.yml")
