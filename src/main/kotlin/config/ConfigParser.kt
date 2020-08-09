@@ -6,13 +6,15 @@ import org.bukkit.configuration.file.FileConfiguration
 
 class ConfigParser(private val main: Main) {
     lateinit var chats: List<String>
-    lateinit var chatProperties : Map<String, Map<String, Any>>
+    lateinit var chatProperties : MutableMap<String, Map<String, Any>>
     lateinit var defaultChannel : String
     lateinit var config : FileConfiguration
 
     fun read(){
         main.saveDefaultConfig()
         main.reloadConfig()
+
+        chatProperties = emptyMap<String, Map<String, Any>>().toMutableMap()
 
         config = main.getConfig()
 
@@ -24,7 +26,7 @@ class ConfigParser(private val main: Main) {
                 properties[key] = config.getConfigurationSection("Channels.$chat")!![key] as Any
             }
 
-            chatProperties = mapOf(Pair(chat, properties))
+            chatProperties[chat] = properties
         }
 
         if (config.getString("defaultChannel") != null) {
