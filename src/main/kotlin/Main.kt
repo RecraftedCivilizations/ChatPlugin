@@ -30,6 +30,10 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         }
         dataParser.updatePlayerChannelMap()
 
+        val bukkitCommandMap: Field = Bukkit.getServer().javaClass.getDeclaredField("commandMap")
+        bukkitCommandMap.isAccessible = true
+        val commandMap: CommandMap = bukkitCommandMap.get(Bukkit.getServer()) as CommandMap
+
         // Create chat obj for every chat defined in the config file
         for (channel in configParser.chats) {
             val properties = configParser.chatProperties[channel]
@@ -46,17 +50,12 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
                             properties["radius"] as Int)
                 }
                 // Register our commands without plugin.yml
-                try {
-                    val bukkitCommandMap: Field = Bukkit.getServer().javaClass.getDeclaredField("commandMap")
-                    bukkitCommandMap.isAccessible = true
-                    val commandMap: CommandMap = bukkitCommandMap.get(Bukkit.getServer()) as CommandMap
-                    commandMap.register(channel, SwitchChannel(
-                            channel, properties["list_style"] as String, "/$channel",
-                            "chatPlugin.commands.switchChannel", ArrayList(), this
-                            ))
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                commandMap.register(channel, SwitchChannel(
+                        channel, properties["list_style"] as String, "/$channel",
+                        "chatPlugin.commands.switchChannel", ArrayList(), this
+                ))
+            }else {
+                Bukkit.getLogger().warning("No properties ofr $channel, please specify some")
             }
         }
 
