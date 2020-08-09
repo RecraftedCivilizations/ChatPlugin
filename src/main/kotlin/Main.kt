@@ -6,7 +6,6 @@ import com.github.DarkVanityOfLight.ChattPlugin.config.DataParser
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandMap
-import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
@@ -17,10 +16,9 @@ import java.io.File
 import java.lang.reflect.Field
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
-    private val parser : ConfigParser = ConfigParser(this)
+    private val configParser : ConfigParser = ConfigParser(this)
     val chats : MutableMap<String, Chatt> = emptyMap<String, Chatt>().toMutableMap()
     lateinit var dataParser : DataParser
-    lateinit var config : YamlConfiguration
 
     override fun onEnable(){
 
@@ -31,9 +29,6 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
             if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}/config.yml")
             Bukkit.getLogger().info("Config file for ChatPlugin is empty please define something in it and reload")
         }
-        // Load the config
-        config = YamlConfiguration.loadConfiguration(f)
-        parser.read()
 
         // Check if data file exists if not create
         f = File(dataFolder.toString() + "/data.yml")
@@ -44,8 +39,8 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         dataParser = DataParser(this)
 
         // Create chat obj for every chat defined in the config file
-        for (channel in parser.chats) {
-            val properties = parser.chatProperties[channel]
+        for (channel in configParser.chats) {
+            val properties = configParser.chatProperties[channel]
             if (properties != null) {
                 if ("ignoreWorld" in properties.keys){
                     chats[channel] = Chatt(
@@ -89,7 +84,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     @EventHandler
     fun onJoin(event: PlayerJoinEvent){
         if (event.player.name !in dataParser.playerChannelMap.keys){
-            dataParser.setData(player.name, parser.defaultChannel)
+            dataParser.setData(player.name, configParser.defaultChannel)
         }
     }
 }
