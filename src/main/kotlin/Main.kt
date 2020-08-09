@@ -30,12 +30,16 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
             Bukkit.getLogger().info("Config file for ChatPlugin is empty please define something in it and reload")
         }
 
+        configParser.read()
+
         // Check if data file exists if not create
         f = File("$dataFolder/data.yml")
         if (!f.exists()){
             val isCreated : Boolean = f.createNewFile()
             if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}/data.yml")
         }
+
+        dataParser.updatePlayerChannelMap()
 
         // Create chat obj for every chat defined in the config file
         for (channel in configParser.chats) {
