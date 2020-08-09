@@ -1,18 +1,27 @@
 package com.github.DarkVanityOfLight.ChattPlugin.config
 
 import com.github.DarkVanityOfLight.ChattPlugin.Main
+import org.bukkit.Bukkit
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
 class DataParser(main: Main) {
-    var dataFile : File = File(main.dataFolder.toString() + "/data.yml")
-    var playerChannelMap : Map<String, String> = emptyMap<String, String>().toMutableMap()
+    var dataFile : File = File(main.dataFolder.absolutePath + "/data.yml")
+    var playerChannelMap : MutableMap<String, String> = emptyMap<String, String>().toMutableMap()
 
     fun updatePlayerChannelMap(){
-        playerChannelMap = readDataMap("Player-Channels")
+        val config : YamlConfiguration = YamlConfiguration.loadConfiguration(dataFile)
+        if (config.getConfigurationSection("Player-Channels") != null) {
+            for (key in config.getConfigurationSection("Player-Channels")!!.getKeys(false)) {
+                playerChannelMap[key] = config.getString("Player-Channels.${key}").toString()
+            }
+        }
+
+        Bukkit.getLogger().info(playerChannelMap.toString())
     }
 
+    @Deprecated("Use the individual update function instead")
     private fun readDataMap(key: String) : Map<String, String> {
         val config : YamlConfiguration = YamlConfiguration.loadConfiguration(dataFile)
         val data : MutableMap<String, String> = emptyMap<String, String>().toMutableMap()

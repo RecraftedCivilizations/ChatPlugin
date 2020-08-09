@@ -11,7 +11,7 @@ class SwitchChannel(private var channelName: String, description: String, usage:
 
     override fun execute(sender: CommandSender, commandLabel: String, args: Array<out String>): Boolean {
         if (sender is Player){
-                main.dataParser.setData(sender.name, channelName)
+                main.dataParser.setData("Player-Channels.${sender.name}", channelName)
         } else {
             Bukkit.getLogger().info("A non player entity tried sending a command wtf")
             return false

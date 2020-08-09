@@ -16,13 +16,12 @@ class ConfigParser(private val main: Main) {
 
         config = main.getConfig()
 
-        chats = config.getList("Channels") as List<String>
+        chats =  config.getConfigurationSection("Channels")?.getKeys(false)!!.toList()
 
         for (chat in chats){
             val properties = emptyMap<String, Any>().toMutableMap()
-
-            for (key in config.getConfigurationSection(chat)!!.getKeys(false)){
-                properties[key] = config.getConfigurationSection(chat)!![key] as Any
+            for (key in config.getConfigurationSection("Channels.$chat")!!.getKeys(false)){
+                properties[key] = config.getConfigurationSection("Channels.$chat")!![key] as Any
             }
 
             chatProperties = mapOf(Pair(chat, properties))

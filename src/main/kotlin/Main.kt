@@ -11,7 +11,6 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.java.JavaPlugin
-import sun.audio.AudioPlayer.player
 import java.io.File
 import java.lang.reflect.Field
 
@@ -22,23 +21,13 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
 
     override fun onEnable(){
 
-        // Check if config file exists if not create
-        var f = File("$dataFolder/config.yml")
-        if (!f.exists()){
-            val isCreated : Boolean = f.createNewFile()
-            if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}/config.yml")
-            Bukkit.getLogger().info("Config file for ChatPlugin is empty please define something in it and reload")
-        }
-
         configParser.read()
 
         // Check if data file exists if not create
-        f = File("$dataFolder/data.yml")
+        val f = File(dataFolder.absolutePath + "/data.yml")
         if (!f.exists()){
-            val isCreated : Boolean = f.createNewFile()
-            if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}/data.yml")
+            f.createNewFile()
         }
-
         dataParser.updatePlayerChannelMap()
 
         // Create chat obj for every chat defined in the config file
@@ -86,8 +75,9 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
 
     @EventHandler
     fun onJoin(event: PlayerJoinEvent){
+        Bukkit.getLogger().info(dataParser.playerChannelMap.keys.toString())
         if (event.player.name !in dataParser.playerChannelMap.keys){
-            dataParser.setData(player.name, configParser.defaultChannel)
+            dataParser.setData("Player-Channels.${event.player.name}", configParser.defaultChannel)
         }
     }
 }
