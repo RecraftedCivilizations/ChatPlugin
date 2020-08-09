@@ -16,9 +16,9 @@ import java.io.File
 import java.lang.reflect.Field
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
-    private val configParser : ConfigParser = ConfigParser(this)
+    val configParser : ConfigParser = ConfigParser(this)
     private val chats : MutableMap<String, Chatt> = emptyMap<String, Chatt>().toMutableMap()
-    private val dataParser : DataParser = DataParser(this)
+    val dataParser : DataParser = DataParser(this)
 
     override fun onEnable(){
 
