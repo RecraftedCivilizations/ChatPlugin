@@ -75,7 +75,17 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
             return
         }
 
-        chat.sendMessage(event.message, event.player)
+        // Set the recipients to players in the radius
+        val players = chat.getPlayersInRange(event.player)
+        for (player in Bukkit.getOnlinePlayers()){
+            if (player !in players){
+                event.recipients.remove(player)
+            }
+        }
+
+        event.message = chat.assembleMessage(event.message, event.player)
+
+
     }
 
     @EventHandler

@@ -18,6 +18,7 @@ class Chatt {
         this.format = format
     }
 
+    @Deprecated("Edit the message in the event don't send a new one")
     fun sendMessage(message : String, sender : Player){
         val players : List<Player> = getPlayersInRange(sender)
         val assembledMessage : String = assembleMessage(message, sender)
@@ -31,15 +32,19 @@ class Chatt {
         }
     }
 
-    private fun assembleMessage(message: String, player : Player) : String{
+    fun assembleMessage(message: String, player : Player) : String{
         val form = format
         form.replace("%player_name%", player.name)
         form.replace("%message%", message)
         return form
     }
 
-    private fun getPlayersInRange(sender: Player) : List<Player>{
+    fun getPlayersInRange(sender: Player) : List<Player>{
         val players = mutableListOf<Player>()
+
+        if (this.ignoreWorld){
+            return Bukkit.getOnlinePlayers().toList()
+        }
 
         for (player in Bukkit.getOnlinePlayers()){
             if (player.location.distance(sender.location) <= this.radius){
