@@ -18,7 +18,6 @@ class DataParser(main: Main) {
             }
         }
 
-        Bukkit.getLogger().info(playerChannelMap.toString())
     }
 
     @Deprecated("Use the individual update function instead")
