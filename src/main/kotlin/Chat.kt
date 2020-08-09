@@ -3,7 +3,7 @@ package com.github.DarkVanityOfLight.ChattPlugin
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
-class Chatt {
+class Chat {
     private var format: String
     private var radius : Int = 0
     private var ignoreWorld = true

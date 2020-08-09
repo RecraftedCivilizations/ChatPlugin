@@ -16,7 +16,7 @@ import java.lang.reflect.Field
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
     val configParser : ConfigParser = ConfigParser(this)
-    private val chats : MutableMap<String, Chatt> = emptyMap<String, Chatt>().toMutableMap()
+    private val chats : MutableMap<String, Chat> = emptyMap<String, Chat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)
 
     override fun onEnable(){
@@ -35,12 +35,12 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
             val properties = configParser.chatProperties[channel]
             if (properties != null) {
                 if ("ignoreWorld" in properties.keys){
-                    chats[channel] = Chatt(
+                    chats[channel] = Chat(
                             properties["name"] as String, properties["list_style"] as String,
                             properties["ignoreWorld"] as Boolean, properties["format"] as String,
                             properties["muteable"] as Boolean, properties["radius"] as Int)
                 } else{
-                    chats[channel] = Chatt(
+                    chats[channel] = Chat(
                             properties["name"] as String, properties["list_style"] as String,
                             properties["format"] as String, properties["muteable"] as Boolean,
                             properties["radius"] as Int)
@@ -67,7 +67,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     fun onMessage(event: AsyncPlayerChatEvent){
         dataParser.updatePlayerChannelMap()
         val channel = dataParser.playerChannelMap[event.player.name]
-        val chat : Chatt? = chats[channel]
+        val chat : Chat? = chats[channel]
         if (chat == null){
             Bukkit.getLogger().warning("No channel with the name $channel could be found," +
                     " but was requested by player ${event.player.name}")
