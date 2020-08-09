@@ -33,9 +33,9 @@ class Chatt {
     }
 
     fun assembleMessage(message: String, player : Player) : String{
-        val form = format
-        form.replace("%player_name%", player.name)
-        form.replace("%message%", message)
+        var form = format
+        form = form.replace("%player_name%", player.name)
+        form = form.replace("%message%", message)
         return form
     }
 
