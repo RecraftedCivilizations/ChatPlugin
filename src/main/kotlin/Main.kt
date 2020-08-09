@@ -81,8 +81,8 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
                 event.recipients.remove(player)
             }
         }
-        event.format = String.format(chat.assembleMessage(event.message, event.player))
-
+        val message = chat.assembleMessage(event.message, event.player)
+        event.format = message
 
     }
 
