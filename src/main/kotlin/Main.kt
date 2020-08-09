@@ -32,18 +32,19 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
 
         // Create chat obj for every chat defined in the config file
         for (channel in configParser.chats) {
-            Bukkit.getLogger().info(channel)
             val properties = configParser.chatProperties[channel]
-            Bukkit.getLogger().info(configParser.chatProperties.toString())
-            Bukkit.getLogger().info(properties.toString())
             if (properties != null) {
                 if ("ignoreWorld" in properties.keys){
                     chats[channel] = Chatt(
-                            properties[name] as String, properties["list_style"] as String,
+                            properties["name"] as String, properties["list_style"] as String,
                             properties["ignoreWorld"] as Boolean, properties["format"] as String,
                             properties["muteable"] as Boolean, properties["radius"] as Int)
+                } else{
+                    chats[channel] = Chatt(
+                            properties["name"] as String, properties["list_style"] as String,
+                            properties["format"] as String, properties["muteable"] as Boolean,
+                            properties["radius"] as Int)
                 }
-
                 // Register our commands without plugin.yml
                 try {
                     val bukkitCommandMap: Field = Bukkit.getServer().javaClass.getDeclaredField("commandMap")
@@ -57,7 +58,6 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
                     e.printStackTrace()
                 }
             }
-            Bukkit.getLogger().info(chats.toString())
         }
 
         Bukkit.getPluginManager().registerEvents(this, this)
