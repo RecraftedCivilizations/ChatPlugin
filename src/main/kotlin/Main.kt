@@ -17,8 +17,8 @@ import java.lang.reflect.Field
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
     private val configParser : ConfigParser = ConfigParser(this)
-    val chats : MutableMap<String, Chatt> = emptyMap<String, Chatt>().toMutableMap()
-    lateinit var dataParser : DataParser
+    private val chats : MutableMap<String, Chatt> = emptyMap<String, Chatt>().toMutableMap()
+    private val dataParser : DataParser = DataParser(this)
 
     override fun onEnable(){
 
@@ -36,7 +36,6 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
             val isCreated : Boolean = f.createNewFile()
             if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}/data.yml")
         }
-        dataParser = DataParser(this)
 
         // Create chat obj for every chat defined in the config file
         for (channel in configParser.chats) {
@@ -51,11 +50,11 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
                 // Register our commands without plugin.yml
                 try {
                     val bukkitCommandMap: Field = Bukkit.getServer().javaClass.getDeclaredField("commandMap")
-                    bukkitCommandMap.setAccessible(true)
+                    bukkitCommandMap.isAccessible = true
                     val commandMap: CommandMap = bukkitCommandMap.get(Bukkit.getServer()) as CommandMap
                     commandMap.register(channel, SwitchChannel(
                             channel, properties["list_style"] as String, "/$channel",
-                            "chatPlugin.commands.switchChannel", ArrayList<String>(), this
+                            "chatPlugin.commands.switchChannel", ArrayList(), this
                             ))
                 } catch (e: Exception) {
                     e.printStackTrace()
