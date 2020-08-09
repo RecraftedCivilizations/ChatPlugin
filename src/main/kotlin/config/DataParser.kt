@@ -6,7 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
 class DataParser(main: Main) {
-    var dataFile : File = File(main.dataFolder.toString() + "data.yml")
+    var dataFile : File = File(main.dataFolder.toString() + "/data.yml")
     var playerChannelMap : Map<String, String> = emptyMap<String, String>().toMutableMap()
 
     fun updatePlayerChannelMap(){

@@ -25,10 +25,10 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     override fun onEnable(){
 
         // Check if config file exists if not create
-        var f = File(dataFolder.toString() + "config.yml")
+        var f = File(dataFolder.toString() + "/config.yml")
         if (!f.exists()){
             val isCreated : Boolean = f.createNewFile()
-            if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}config.yml")
+            if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}/config.yml")
             Bukkit.getLogger().info("Config file for ChatPlugin is empty please define something in it and reload")
         }
         // Load the config
@@ -36,10 +36,10 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         parser.read()
 
         // Check if data file exists if not create
-        f = File(dataFolder.toString() + "data.yml")
+        f = File(dataFolder.toString() + "/data.yml")
         if (!f.exists()){
             val isCreated : Boolean = f.createNewFile()
-            if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}data.yml")
+            if (!isCreated) Bukkit.getLogger().warning("Could not create file ${dataFolder}/data.yml")
         }
         dataParser = DataParser(this)
 
