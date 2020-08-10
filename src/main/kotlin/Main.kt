@@ -16,7 +16,7 @@ import java.lang.reflect.Field
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
     val configParser : ConfigParser = ConfigParser(this)
-    private val chats : MutableMap<String, Chat> = emptyMap<String, Chat>().toMutableMap()
+    val chats : MutableMap<String, Chat> = emptyMap<String, Chat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)
 
     override fun onEnable(){
