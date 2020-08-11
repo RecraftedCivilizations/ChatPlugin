@@ -52,4 +52,11 @@ class DataParser(main: Main) {
         val config : YamlConfiguration = YamlConfiguration.loadConfiguration(dataFile)
         return config.getBoolean(key)
     }
+
+    fun getStringList(key: String) : List<String>{
+        val list = emptyList<String>().toMutableList()
+        val config : YamlConfiguration = YamlConfiguration.loadConfiguration(dataFile)
+
+        return config.getStringList(key)
+    }
 }
