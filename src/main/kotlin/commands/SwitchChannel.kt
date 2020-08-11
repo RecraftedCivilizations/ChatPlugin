@@ -11,11 +11,10 @@ class SwitchChannel(private val channelName: String, description: String, usage:
 
     override fun execute(sender: CommandSender, commandLabel: String, args: Array<out String>): Boolean {
         if (sender is Player){
-                if (args.size >= 0) {
+                if (args.isEmpty()) {
                     main.dataParser.setData("Player-Channels.${sender.name}", channelName)
                 }else {
-                    var result = ""
-                    args.forEach { it -> result += it }
+                    val result = args.joinToString(" ")
                     main.chats[channelName]?.sendMessage(result, sender)
                 }
 
