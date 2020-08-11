@@ -47,4 +47,9 @@ class DataParser(main: Main) {
         config.set(key, value)
         config.save(dataFile)
     }
+
+    fun getBoolean(key: String) : Boolean{
+        val config : YamlConfiguration = YamlConfiguration.loadConfiguration(dataFile)
+        return config.getBoolean(key)
+    }
 }
