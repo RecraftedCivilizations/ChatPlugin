@@ -9,6 +9,7 @@ class ConfigParser(private val main: Main) {
     lateinit var chatProperties : MutableMap<String, Map<String, Any>>
     lateinit var defaultChannel : String
     lateinit var config : FileConfiguration
+    var spyFormat : String? = null
 
     fun read(){
         main.saveDefaultConfig()
@@ -17,6 +18,12 @@ class ConfigParser(private val main: Main) {
         chatProperties = emptyMap<String, Map<String, Any>>().toMutableMap()
 
         config = main.getConfig()
+
+        spyFormat = config.getString("spy-format")
+        if (spyFormat == null){
+            Bukkit.getLogger().warning("No default spy format found using: %channel% %sender% %message%")
+            spyFormat = "%channel% %sender% %message%"
+        }
 
         chats =  config.getConfigurationSection("Channels")?.getKeys(false)!!.toList()
 
