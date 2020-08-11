@@ -1,6 +1,7 @@
 package com.github.DarkVanityOfLight.ChattPlugin
 
 import org.bukkit.Bukkit
+import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 
 class Chat {
@@ -34,8 +35,11 @@ class Chat {
 
     fun assembleMessage(message: String, player : Player) : String{
         var form = format
+
         form = form.replace("%player_name%", player.name)
         form = form.replace("%message%", message)
+
+        form = ChatColor.translateAlternateColorCodes('&', form)
         return form
     }
 
