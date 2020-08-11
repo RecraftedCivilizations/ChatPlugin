@@ -4,7 +4,7 @@ import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 
-class Chat {
+class PlayerChat {
     private var format: String
     private var radius : Int = 0
     private var ignoreWorld = true

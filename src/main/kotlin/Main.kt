@@ -1,5 +1,6 @@
 package com.github.DarkVanityOfLight.ChattPlugin
 
+import com.github.DarkVanityOfLight.ChattPlugin.chats.PlayerChat
 import com.github.DarkVanityOfLight.ChattPlugin.commands.SwitchChannel
 import com.github.DarkVanityOfLight.ChattPlugin.config.ConfigParser
 import com.github.DarkVanityOfLight.ChattPlugin.config.DataParser
@@ -16,7 +17,7 @@ import java.lang.reflect.Field
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
     val configParser : ConfigParser = ConfigParser(this)
-    val chats : MutableMap<String, Chat> = emptyMap<String, Chat>().toMutableMap()
+    val chats : MutableMap<String, PlayerChat> = emptyMap<String, PlayerChat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)
     private val chatLog : File = File(this.dataFolder.absolutePath + "/log.lst")
 
@@ -44,12 +45,12 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
             val properties = configParser.chatProperties[channel]
             if (properties != null) {
                 if ("ignoreWorld" in properties.keys){
-                    chats[channel] = Chat(
+                    chats[channel] = PlayerChat(
                             properties["name"] as String, properties["list_style"] as String,
                             properties["ignoreWorld"] as Boolean, properties["format"] as String,
                             properties["muteable"] as Boolean, properties["radius"] as Int)
                 } else{
-                    chats[channel] = Chat(
+                    chats[channel] = PlayerChat(
                             properties["name"] as String, properties["list_style"] as String,
                             properties["format"] as String, properties["muteable"] as Boolean,
                             properties["radius"] as Int)
@@ -71,7 +72,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     fun onMessage(event: AsyncPlayerChatEvent){
         dataParser.updatePlayerChannelMap()
         val channel = dataParser.playerChannelMap[event.player.name]
-        val chat : Chat? = chats[channel]
+        val chat : PlayerChat? = chats[channel]
         if (chat == null){
             Bukkit.getLogger().warning("No channel with the name $channel could be found," +
                     " but was requested by player ${event.player.name}")
