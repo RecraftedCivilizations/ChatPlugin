@@ -1,10 +1,9 @@
-package com.github.DarkVanityOfLight.ChattPlugin.commands
+package com.github.DarkVanityOfLight.ChattPlugin.chats
 
 import com.github.DarkVanityOfLight.ChattPlugin.config.DataParser
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
-import sun.applet.Main
 
 class SpyChat(val dataParser : DataParser) : CommandExecutor{
 

@@ -1,4 +1,4 @@
-package com.github.DarkVanityOfLight.ChattPlugin
+package com.github.DarkVanityOfLight.ChattPlugin.chats
 
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
