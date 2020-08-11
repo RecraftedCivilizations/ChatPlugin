@@ -38,6 +38,7 @@ class Chat {
 
         form = form.replace("%player_name%", player.name)
         form = form.replace("%message%", message)
+        form = form.replace("%nickname%", player.displayName)
 
         form = ChatColor.translateAlternateColorCodes('&', form)
         return form

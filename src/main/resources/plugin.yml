@@ -1,5 +1,5 @@
 name: ChatPlugin
 main: com.github.DarkVanityOfLight.ChattPlugin.Main
-version: 1.2.1
+version: 1.2.2
 author: DarkVanityOfLight
 api-version: '1.16'
