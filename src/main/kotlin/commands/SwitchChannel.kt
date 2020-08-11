@@ -16,6 +16,7 @@ class SwitchChannel(private val channelName: String, description: String, usage:
                 }else {
                     val result = args.joinToString(" ")
                     main.chats[channelName]?.sendMessage(result, sender)
+                    main.log(result)
                 }
 
         } else {

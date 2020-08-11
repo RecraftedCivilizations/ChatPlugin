@@ -18,8 +18,13 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     val configParser : ConfigParser = ConfigParser(this)
     val chats : MutableMap<String, Chat> = emptyMap<String, Chat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)
+    private val chatLog : File = File(this.dataFolder.absolutePath + "/log.lst")
 
     override fun onEnable(){
+
+        if (!chatLog.exists()){
+            chatLog.createNewFile()
+        }
 
         configParser.read()
 
@@ -84,6 +89,8 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         val message = chat.assembleMessage(event.message, event.player)
         event.format = message
 
+        log(message)
+
     }
 
     @EventHandler
@@ -91,5 +98,9 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         if (event.player.name !in dataParser.playerChannelMap.keys){
             dataParser.setData("Player-Channels.${event.player.name}", configParser.defaultChannel)
         }
+    }
+
+    fun log(message : String){
+        chatLog.appendText(message + "\n")
     }
 }
