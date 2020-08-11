@@ -7,5 +7,5 @@ interface Chatable {
     abstract var format : String
 
     fun sendMessage()
-    fun assembleMessage(message: String, sender: Player) : String
+    fun assembleMessage(message: String, sender: Player, channelName: String? = null) : String
 }
