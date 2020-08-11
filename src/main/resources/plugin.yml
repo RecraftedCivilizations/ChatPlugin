@@ -3,3 +3,8 @@ main: com.github.DarkVanityOfLight.ChattPlugin.Main
 version: 1.2.3
 author: DarkVanityOfLight
 api-version: '1.16'
+
+permissions:
+  chatplugin.spy:
+    description: let you see all chats without range restrictions using /spy
+    default: false
