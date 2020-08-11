@@ -2,9 +2,17 @@ defaultChannel: 'OOC'
 
 Channels:
   OOC:
-    name: '&7talking in &fOOC chat'
-    list_style: '&8[&7OOC&8] &f- &7The OOC chat channel &f- &7Global Radius'
+    name: 'Talking in OOC chat'
+    list_style: '[OOC] The OOC chat channel - Global radius'
     radius: 0
     ignore_world: true
-    format: '&8[&7OOC&8] &8| &7%factionsuuid_faction_name% &8| &r%prefix% &7%player_name%&8 >> %message%'
+    format: '[OOC] %player_name% >> message'
+    muteable: true
+
+  IC:
+    name: 'Talking in IC chat'
+    list_style: '[IC] The IC chat channel - 20 block radius'
+    radius: 20
+    ignore_world: false
+    format: '[IC] %player_name% >> message'
     muteable: true
