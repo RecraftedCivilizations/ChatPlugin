@@ -1,11 +1,27 @@
 package com.github.DarkVanityOfLight.ChattPlugin.chats
 
+import com.github.DarkVanityOfLight.ChattPlugin.config.ConfigParser
 import com.github.DarkVanityOfLight.ChattPlugin.config.DataParser
+import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 
-class SpyChat(val dataParser : DataParser) : CommandExecutor{
+class SpyChat(val dataParser : DataParser, val configParser: ConfigParser) : CommandExecutor, Chat() {
+    override var format: String = configParser.spyFormat!!
+
+
+    override fun sendMessage(message : String, sender : Player, channelName: String?) {
+        val spyPlayer = dataParser.spyPlayer
+        val sendToPlayers = emptySet<Player>().toMutableSet()
+
+        val asmMessage = assembleMessage(message, sender, channelName)
+
+        Bukkit.getOnlinePlayers().forEach{ player -> if (player.name in spyPlayer) sendToPlayers.add(player)}
+
+        sendToPlayers.forEach { spy -> spy.sendMessage(asmMessage) }
+    }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
