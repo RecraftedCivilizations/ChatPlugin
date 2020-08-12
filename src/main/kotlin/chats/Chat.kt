@@ -13,7 +13,6 @@ abstract class Chat : Chatable {
         var form = format
 
         if (Bukkit.getPluginManager().getPlugin("Factions") != null){
-            val factionsPlugin = Bukkit.getPluginManager().getPlugin("Factions")!!.javaClass as FactionsPlugin
             val fPlayer = FPlayers.getInstance().getByPlayer(sender)
 
 
