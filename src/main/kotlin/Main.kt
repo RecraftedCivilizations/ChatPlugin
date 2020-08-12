@@ -34,7 +34,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         if (!f.exists()){
             f.createNewFile()
         }
-        dataParser.updatePlayerChannelMap()
+        dataParser.update()
 
         val bukkitCommandMap: Field = Bukkit.getServer().javaClass.getDeclaredField("commandMap")
         bukkitCommandMap.isAccessible = true
@@ -70,7 +70,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
 
     @EventHandler
     fun onMessage(event: AsyncPlayerChatEvent){
-        dataParser.updatePlayerChannelMap()
+        dataParser.update()
         val channel = dataParser.playerChannelMap[event.player.name]
         val chat : PlayerChat? = chats[channel]
         if (chat == null){
