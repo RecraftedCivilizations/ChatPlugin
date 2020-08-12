@@ -24,18 +24,22 @@ class SpyChat(val dataParser : DataParser, val configParser: ConfigParser) : Com
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+        if (sender is Player){
+            if (sender.hasPermission("chatplugin.spy")){
+                if (sender.name in dataParser.spyPlayer){
+                    dataParser.removeStringList(listOf(sender.name), "spy-players")
+                }else{
+                    dataParser.addStringList(listOf<String>(sender.name), "spy-players")
+                }
 
-        if (sender.hasPermission("chatplugin.spy")){
-            if (sender.name in dataParser.spyPlayer){
-                dataParser.removeStringList(listOf(sender.name), "spy-players")
-            }else{
-                dataParser.addStringList(listOf<String>(sender.name), "spy-players")
+                dataParser.update()
             }
 
-            dataParser.update()
+            return true
+        }else {
+            Bukkit.getLogger().info("You must be a player to use this command")
+            return false
         }
-
-        return true
     }
 
 }

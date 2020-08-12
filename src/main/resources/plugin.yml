@@ -8,3 +8,10 @@ permissions:
   chatplugin.spy:
     description: let you see all chats without range restrictions using /spy
     default: false
+
+commands:
+  spy:
+    description: Spy on all channels without range restriction
+    usage: /spy
+    permission: chatplugin.spy
+    permission-message: Fuck of you are not allowed to spy on people

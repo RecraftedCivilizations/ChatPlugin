@@ -70,6 +70,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         }
 
         Bukkit.getPluginManager().registerEvents(this, this)
+        this.getCommand("spy")?.setExecutor(spyChat)
     }
 
     @EventHandler
