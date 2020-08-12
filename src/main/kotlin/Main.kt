@@ -1,6 +1,7 @@
 package com.github.DarkVanityOfLight.ChattPlugin
 
 import com.github.DarkVanityOfLight.ChattPlugin.chats.PlayerChat
+import com.github.DarkVanityOfLight.ChattPlugin.chats.SpyChat
 import com.github.DarkVanityOfLight.ChattPlugin.commands.SwitchChannel
 import com.github.DarkVanityOfLight.ChattPlugin.config.ConfigParser
 import com.github.DarkVanityOfLight.ChattPlugin.config.DataParser
@@ -20,6 +21,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     val chats : MutableMap<String, PlayerChat> = emptyMap<String, PlayerChat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)
     private val chatLog : File = File(this.dataFolder.absolutePath + "/log.lst")
+    private lateinit var spyChat: SpyChat
 
     override fun onEnable(){
 
@@ -35,6 +37,8 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
             f.createNewFile()
         }
         dataParser.update()
+
+        spyChat = SpyChat(dataParser, configParser)
 
         val bukkitCommandMap: Field = Bukkit.getServer().javaClass.getDeclaredField("commandMap")
         bukkitCommandMap.isAccessible = true
@@ -90,6 +94,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         val message = chat.assembleMessage(event.message, event.player)
         event.format = message
 
+        spyChat.sendMessage(event.message, event.player, channel)
         log(message)
 
     }
