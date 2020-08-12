@@ -4,8 +4,8 @@ import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 
-class PlayerChat {
-    private var format: String
+class PlayerChat : Chat{
+    override var format : String
     private var radius : Int = 0
     private var ignoreWorld = true
 
@@ -20,7 +20,7 @@ class PlayerChat {
     }
 
     @Deprecated("Edit the message in the event don't send a new one")
-    fun sendMessage(message : String, sender : Player){
+    override fun sendMessage(message : String, sender : Player){
         val players : List<Player> = getPlayersInRange(sender)
         val assembledMessage : String = assembleMessage(message, sender)
 
@@ -31,17 +31,6 @@ class PlayerChat {
                 player.sendMessage(assembledMessage)
             }
         }
-    }
-
-    fun assembleMessage(message: String, player : Player) : String{
-        var form = format
-
-        form = form.replace("%player_name%", player.name)
-        form = form.replace("%message%", message)
-        form = form.replace("%nickname%", player.displayName)
-
-        form = ChatColor.translateAlternateColorCodes('&', form)
-        return form
     }
 
     fun getPlayersInRange(sender: Player) : List<Player>{
