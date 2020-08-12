@@ -68,4 +68,13 @@ class DataParser(main: Main) {
 
         return config.getStringList(key)
     }
+
+    fun addStringList(toWrite: List<String>, key: String){
+        val config : YamlConfiguration = YamlConfiguration.loadConfiguration(dataFile)
+        val currentList = config.getStringList(key).toMutableList()
+
+        currentList.addAll(toWrite)
+
+        config.set(key, currentList)
+    }
 }
