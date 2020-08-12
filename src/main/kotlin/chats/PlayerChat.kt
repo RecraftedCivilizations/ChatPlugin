@@ -20,7 +20,7 @@ class PlayerChat : Chat{
     }
 
     @Deprecated("Edit the message in the event don't send a new one")
-    override fun sendMessage(message : String, sender : Player){
+    override fun sendMessage(message : String, sender : Player, channelName: String?){
         val players : List<Player> = getPlayersInRange(sender)
         val assembledMessage : String = assembleMessage(message, sender)
 
