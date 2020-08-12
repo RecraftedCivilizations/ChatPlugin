@@ -9,12 +9,21 @@ import java.io.File
 class DataParser(main: Main) {
     var dataFile : File = File(main.dataFolder.absolutePath + "/data.yml")
     var playerChannelMap : MutableMap<String, String> = emptyMap<String, String>().toMutableMap()
+    var spyPlayer : MutableSet<String> = emptySet<String>().toMutableSet()
 
-    fun updatePlayerChannelMap(){
+    fun update(){
         val config : YamlConfiguration = YamlConfiguration.loadConfiguration(dataFile)
+
         if (config.getConfigurationSection("Player-Channels") != null) {
             for (key in config.getConfigurationSection("Player-Channels")!!.getKeys(false)) {
                 playerChannelMap[key] = config.getString("Player-Channels.${key}").toString()
+            }
+        }
+
+        spyPlayer = emptySet<String>().toMutableSet()
+        if (config.getConfigurationSection("spy-players") != null) {
+            for (player in config.getConfigurationSection("spy-players")!!.getStringList("spy-players")){
+                spyPlayer.add(player)
             }
         }
 
