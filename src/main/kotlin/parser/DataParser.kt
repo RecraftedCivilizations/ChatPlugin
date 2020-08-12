@@ -1,4 +1,4 @@
-package com.github.DarkVanityOfLight.ChattPlugin.config
+package com.github.DarkVanityOfLight.ChattPlugin.parser
 
 import com.github.DarkVanityOfLight.ChattPlugin.Main
 import org.bukkit.Bukkit

@@ -1,7 +1,7 @@
 package com.github.DarkVanityOfLight.ChattPlugin.chats
 
-import com.github.DarkVanityOfLight.ChattPlugin.config.ConfigParser
-import com.github.DarkVanityOfLight.ChattPlugin.config.DataParser
+import com.github.DarkVanityOfLight.ChattPlugin.parser.ConfigParser
+import com.github.DarkVanityOfLight.ChattPlugin.parser.DataParser
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

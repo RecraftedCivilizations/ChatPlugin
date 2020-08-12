@@ -3,8 +3,8 @@ package com.github.DarkVanityOfLight.ChattPlugin
 import com.github.DarkVanityOfLight.ChattPlugin.chats.PlayerChat
 import com.github.DarkVanityOfLight.ChattPlugin.chats.SpyChat
 import com.github.DarkVanityOfLight.ChattPlugin.commands.SwitchChannel
-import com.github.DarkVanityOfLight.ChattPlugin.config.ConfigParser
-import com.github.DarkVanityOfLight.ChattPlugin.config.DataParser
+import com.github.DarkVanityOfLight.ChattPlugin.parser.ConfigParser
+import com.github.DarkVanityOfLight.ChattPlugin.parser.DataParser
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandMap
