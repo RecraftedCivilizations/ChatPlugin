@@ -10,12 +10,16 @@ class SpyChat(val dataParser : DataParser) : CommandExecutor{
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
 
         if (sender.hasPermission("chatplugin.spy")){
-            val current = dataParser.getBoolean("spy-mode.${sender.name}")
-            dataParser.setData("spy-mode.${sender.name}", !current)
+            if (sender.name in dataParser.spyPlayer){
+                dataParser.removeStringList(listOf(sender.name), "spy-players")
+            }else{
+                dataParser.addStringList(listOf<String>(sender.name), "spy-players")
+            }
+
+            dataParser.update()
         }
 
         return true
     }
-
 
 }
