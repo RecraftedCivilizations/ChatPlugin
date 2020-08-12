@@ -76,5 +76,16 @@ class DataParser(main: Main) {
         currentList.addAll(toWrite)
 
         config.set(key, currentList)
+        config.save(dataFile)
+    }
+
+    fun removeStringList(toRemove: List<String>, key: String){
+        val config : YamlConfiguration = YamlConfiguration.loadConfiguration(dataFile)
+        val currentList = config.getStringList(key).toMutableList()
+
+        toRemove.forEach { it -> currentList.remove(it)}
+
+        config.set(key, currentList)
+        config.save(dataFile)
     }
 }
