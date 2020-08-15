@@ -8,7 +8,9 @@ import com.github.DarkVanityOfLight.ChattPlugin.parser.DataParser
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandMap
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.bukkit.event.player.PlayerJoinEvent
@@ -73,7 +75,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         this.getCommand("spy")?.setExecutor(spyChat)
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     fun onMessage(event: AsyncPlayerChatEvent){
         dataParser.update()
         val channel = dataParser.playerChannelMap[event.player.name]
@@ -86,12 +88,14 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         }
 
         // Set the recipients to players in the radius
-        val players = chat.getPlayersInRange(event.player)
-        for (player in Bukkit.getOnlinePlayers()){
-            if (player !in players){
-                event.recipients.remove(player)
-            }
+        if (!chat.ignoreWorld){
+            val players = chat.getPlayersInRange(event.player)
+            val recipients = emptySet<Player>().toMutableSet()
+            Bukkit.getOnlinePlayers().forEach{player ->  if (player in players) recipients.add(player)}
+            event.recipients.removeAll(event.recipients)
+            event.recipients.addAll(recipients)
         }
+
         val message = chat.assembleMessage(event.message, event.player)
         event.format = message
 

@@ -7,7 +7,7 @@ import org.bukkit.entity.Player
 class PlayerChat : Chat{
     override var format : String
     private var radius : Int = 0
-    private var ignoreWorld = true
+    var ignoreWorld = true
 
     constructor(name : String, list_style : String, ignoreWorld : Boolean, format : String, muteable : Boolean, radius : Int){
         this.format = format
