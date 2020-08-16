@@ -20,6 +20,7 @@ class PlayerChat : Chat{
     constructor(name: String, list_style: String, format: String, muteable: Boolean, radius: Int, main: Main){
         this.radius = radius
         this.format = format
+        this.main = main
     }
 
     override fun sendMessage(message : String, sender : Player, channelName: String?){
