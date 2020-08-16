@@ -75,7 +75,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         this.getCommand("spy")?.setExecutor(spyChat)
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler()
     fun onMessage(event: AsyncPlayerChatEvent){
         dataParser.update()
         val channel = dataParser.playerChannelMap[event.player.name]
@@ -87,13 +87,9 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
             return
         }
 
-        // Set the recipients to players in the radius
         if (!chat.ignoreWorld){
-            val players = chat.getPlayersInRange(event.player)
-            val recipients = emptySet<Player>().toMutableSet()
-            Bukkit.getOnlinePlayers().forEach{player ->  if (player in players) recipients.add(player)}
-            event.recipients.removeAll(event.recipients)
-            event.recipients.addAll(recipients)
+            chat.sendMessage(event.message, event.player, channel)
+            event.recipients.clear()
         }
 
         val message = chat.assembleMessage(event.message, event.player)

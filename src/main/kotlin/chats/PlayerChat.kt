@@ -19,21 +19,16 @@ class PlayerChat : Chat{
         this.format = format
     }
 
-    @Deprecated("Edit the message in the event don't send a new one")
     override fun sendMessage(message : String, sender : Player, channelName: String?){
         val players : List<Player> = getPlayersInRange(sender)
         val assembledMessage : String = assembleMessage(message, sender)
 
-        if (ignoreWorld) {
-            Bukkit.getServer().broadcastMessage(assembledMessage)
-        } else {
-            for (player in players){
-                player.sendMessage(assembledMessage)
-            }
+        for (player in players){
+            player.sendMessage(assembledMessage)
         }
     }
 
-    fun getPlayersInRange(sender: Player) : List<Player>{
+    private fun getPlayersInRange(sender: Player) : List<Player>{
         val players = mutableListOf<Player>()
 
         if (this.ignoreWorld){
@@ -46,6 +41,7 @@ class PlayerChat : Chat{
             }
         }
 
+        players.add(sender)
         return players
     }
 }
