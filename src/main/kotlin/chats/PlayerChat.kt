@@ -26,9 +26,14 @@ class PlayerChat : Chat{
         val players : List<Player> = getPlayersInRange(sender)
         val assembledMessage : String = assembleMessage(message, sender)
 
-        for (player in players){
-            player.sendMessage(assembledMessage)
+        if (!ignoreWorld){
+            for (player in players){
+                player.sendMessage(assembledMessage)
+            }
+        } else{
+            Bukkit.getOnlinePlayers().forEach { it -> it.sendMessage(message) }
         }
+
     }
 
     private fun getPlayersInRange(sender: Player) : List<Player>{
