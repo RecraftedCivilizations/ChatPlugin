@@ -3,8 +3,13 @@ package com.github.DarkVanityOfLight.ChattPlugin
 import com.github.DarkVanityOfLight.ChattPlugin.chats.PlayerChat
 import com.github.DarkVanityOfLight.ChattPlugin.chats.SpyChat
 import com.github.DarkVanityOfLight.ChattPlugin.commands.SwitchChannel
+import com.github.DarkVanityOfLight.ChattPlugin.listeners.ChatListener
 import com.github.DarkVanityOfLight.ChattPlugin.parser.ConfigParser
 import com.github.DarkVanityOfLight.ChattPlugin.parser.DataParser
+import com.massivecraft.factions.FPlayer
+import com.massivecraft.factions.FPlayers
+import com.massivecraft.factions.struct.ChatMode
+import com.sun.org.apache.xpath.internal.operations.Bool
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandMap
@@ -24,6 +29,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     val dataParser : DataParser = DataParser(this)
     private val chatLog : File = File(this.dataFolder.absolutePath + "/log.lst")
     private lateinit var spyChat: SpyChat
+    var factionsEnabled: Boolean = false
 
     override fun onEnable(){
 
@@ -33,6 +39,8 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
 
         configParser.read()
 
+        if (Bukkit.getPluginManager().isPluginEnabled("Factions")) factionsEnabled = true
+
         // Check if data file exists if not create
         val f = File(dataFolder.absolutePath + "/data.yml")
         if (!f.exists()){
@@ -40,7 +48,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         }
         dataParser.update()
 
-        spyChat = SpyChat(dataParser, configParser)
+        spyChat = SpyChat(this)
 
         val bukkitCommandMap: Field = Bukkit.getServer().javaClass.getDeclaredField("commandMap")
         bukkitCommandMap.isAccessible = true
@@ -54,12 +62,14 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
                     chats[channel] = PlayerChat(
                             properties["name"] as String, properties["list_style"] as String,
                             properties["ignoreWorld"] as Boolean, properties["format"] as String,
-                            properties["muteable"] as Boolean, properties["radius"] as Int)
+                            properties["muteable"] as Boolean, properties["radius"] as Int),
+                            this
                 } else{
                     chats[channel] = PlayerChat(
                             properties["name"] as String, properties["list_style"] as String,
                             properties["format"] as String, properties["muteable"] as Boolean,
-                            properties["radius"] as Int)
+                            properties["radius"] as Int),
+                            this
                 }
                 // Register our commands without plugin.yml
                 commandMap.register(channel, SwitchChannel(
@@ -91,12 +101,6 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
             chat.sendMessage(event.message, event.player, channel)
             event.recipients.clear()
         }
-
-        val message = chat.assembleMessage(event.message, event.player)
-        event.format = message
-
-        spyChat.sendMessage(event.message, event.player, channel)
-        log(message)
 
     }
 

@@ -1,5 +1,6 @@
 package com.github.DarkVanityOfLight.ChattPlugin.chats
 
+import com.github.DarkVanityOfLight.ChattPlugin.Main
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
@@ -8,13 +9,15 @@ class PlayerChat : Chat{
     override var format : String
     private var radius : Int = 0
     var ignoreWorld = true
+    override lateinit var main : Main
 
-    constructor(name : String, list_style : String, ignoreWorld : Boolean, format : String, muteable : Boolean, radius : Int){
+    constructor(name : String, list_style : String, ignoreWorld : Boolean, format : String, muteable : Boolean, radius : Int, main: Main){
         this.format = format
         this.ignoreWorld = ignoreWorld
         this.radius = radius
+        this.main = main
     }
-    constructor(name: String, list_style: String, format: String, muteable: Boolean, radius: Int){
+    constructor(name: String, list_style: String, format: String, muteable: Boolean, radius: Int, main: Main){
         this.radius = radius
         this.format = format
     }

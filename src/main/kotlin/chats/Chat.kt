@@ -12,7 +12,7 @@ abstract class Chat : Chatable {
     override fun assembleMessage(message: String, sender : Player, channelName: String?) : String {
         var form = format
 
-        if (Bukkit.getPluginManager().getPlugin("Factions") != null){
+        if (main.factionsEnabled){
             val fPlayer = FPlayers.getInstance().getByPlayer(sender)
 
 

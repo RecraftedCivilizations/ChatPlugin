@@ -1,5 +1,6 @@
 package com.github.DarkVanityOfLight.ChattPlugin.chats
 
+import com.github.DarkVanityOfLight.ChattPlugin.Main
 import com.github.DarkVanityOfLight.ChattPlugin.parser.ConfigParser
 import com.github.DarkVanityOfLight.ChattPlugin.parser.DataParser
 import org.bukkit.Bukkit
@@ -8,12 +9,12 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
-class SpyChat(val dataParser : DataParser, val configParser: ConfigParser) : CommandExecutor, Chat() {
-    override var format: String = configParser.spyFormat!!
+class SpyChat(override var main: Main) : CommandExecutor, Chat() {
+    override var format: String = main.configParser.spyFormat!!
 
 
     override fun sendMessage(message : String, sender : Player, channelName: String?) {
-        val spyPlayer = dataParser.spyPlayer
+        val spyPlayer = main.dataParser.spyPlayer
         val sendToPlayers = emptySet<Player>().toMutableSet()
 
         val asmMessage = assembleMessage(message, sender, channelName)
@@ -26,13 +27,13 @@ class SpyChat(val dataParser : DataParser, val configParser: ConfigParser) : Com
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender is Player){
             if (sender.hasPermission("chatplugin.spy")){
-                if (sender.name in dataParser.spyPlayer){
-                    dataParser.removeStringList(listOf(sender.name), "spy-players")
+                if (sender.name in main.dataParser.spyPlayer){
+                    main.dataParser.removeStringList(listOf(sender.name), "spy-players")
                 }else{
-                    dataParser.addStringList(listOf<String>(sender.name), "spy-players")
+                    main.dataParser.addStringList(listOf<String>(sender.name), "spy-players")
                 }
 
-                dataParser.update()
+                main.dataParser.update()
             }
 
             return true
