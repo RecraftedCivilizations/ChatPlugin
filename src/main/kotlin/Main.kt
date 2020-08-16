@@ -62,14 +62,12 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
                     chats[channel] = PlayerChat(
                             properties["name"] as String, properties["list_style"] as String,
                             properties["ignoreWorld"] as Boolean, properties["format"] as String,
-                            properties["muteable"] as Boolean, properties["radius"] as Int),
-                            this
+                            properties["muteable"] as Boolean, properties["radius"] as Int, this)
                 } else{
                     chats[channel] = PlayerChat(
                             properties["name"] as String, properties["list_style"] as String,
                             properties["format"] as String, properties["muteable"] as Boolean,
-                            properties["radius"] as Int),
-                            this
+                            properties["radius"] as Int, this)
                 }
                 // Register our commands without plugin.yml
                 commandMap.register(channel, SwitchChannel(
