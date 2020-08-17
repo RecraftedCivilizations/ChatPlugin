@@ -9,7 +9,7 @@ class PlayerChat : Chat{
     override var format : String
     private var radius : Int = 0
     var ignoreWorld = true
-    override lateinit var main : Main
+    override var main : Main
 
     constructor(name : String, list_style : String, ignoreWorld : Boolean, format : String, muteable : Boolean, radius : Int, main: Main){
         this.format = format
@@ -27,12 +27,8 @@ class PlayerChat : Chat{
         val players : List<Player> = getPlayersInRange(sender)
         val assembledMessage : String = assembleMessage(message, sender)
 
-        if (!ignoreWorld){
-            for (player in players){
-                player.sendMessage(assembledMessage)
-            }
-        } else{
-            Bukkit.getOnlinePlayers().forEach { it -> it.sendMessage(message) }
+        for (player in players){
+            player.sendMessage(assembledMessage)
         }
 
     }
