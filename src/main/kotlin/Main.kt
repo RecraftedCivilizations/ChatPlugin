@@ -80,26 +80,8 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         }
 
         Bukkit.getPluginManager().registerEvents(this, this)
+        Bukkit.getPluginManager().registerEvents(ChatListener(this), this)
         this.getCommand("spy")?.setExecutor(spyChat)
-    }
-
-    @EventHandler()
-    fun onMessage(event: AsyncPlayerChatEvent){
-        dataParser.update()
-        val channel = dataParser.playerChannelMap[event.player.name]
-        val chat : PlayerChat? = chats[channel]
-        if (chat == null){
-            Bukkit.getLogger().warning("No channel with the name $channel could be found," +
-                    " but was requested by player ${event.player.name}")
-            event.isCancelled = true
-            return
-        }
-
-        if (!chat.ignoreWorld){
-            chat.sendMessage(event.message, event.player, channel)
-            event.recipients.clear()
-        }
-
     }
 
     @EventHandler
