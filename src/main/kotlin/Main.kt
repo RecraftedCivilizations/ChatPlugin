@@ -33,11 +33,11 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
 
     override fun onEnable(){
 
+        configParser.read()
+
         if (!chatLog.exists()){
             chatLog.createNewFile()
         }
-
-        configParser.read()
 
         if (Bukkit.getPluginManager().isPluginEnabled("Factions")) factionsEnabled = true
 
