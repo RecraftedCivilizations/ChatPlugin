@@ -4,7 +4,6 @@ import com.github.DarkVanityOfLight.ChattPlugin.Main
 import com.massivecraft.factions.FPlayers
 import com.massivecraft.factions.struct.ChatMode
 import org.bukkit.Bukkit
-import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 
 class PlayerChat : Chat{
