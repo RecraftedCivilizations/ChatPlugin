@@ -58,7 +58,8 @@ class PlayerChat : Chat{
 
         for (player in Bukkit.getOnlinePlayers()){
             if (player.location.distance(sender.location) <= this.radius){
-                players.add(player)
+                if (name !in main.dataParser.getStringList("Mutet-Channels.${sender.name}"))
+                    players.add(player)
             }
         }
 
