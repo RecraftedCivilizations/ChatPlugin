@@ -46,7 +46,6 @@ class PlayerChat : Chat{
             }
         }
 
-        players.add(sender)
         return players
     }
 }
