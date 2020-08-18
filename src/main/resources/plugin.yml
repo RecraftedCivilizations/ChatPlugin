@@ -20,3 +20,7 @@ commands:
   mute:
     description: Mute one or more given channels
     usage: /mute <chanel> <names>
+
+  unmute:
+    description: Unmute a given channel
+    usage: /unmute <channel> <names>
