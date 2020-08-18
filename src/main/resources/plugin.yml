@@ -1,6 +1,6 @@
 name: ChatPlugin
 main: com.github.DarkVanityOfLight.ChattPlugin.Main
-version: 1.4.4
+version: 1.4.5
 author: DarkVanityOfLight
 api-version: '1.16'
 softdepend: [Factions]
