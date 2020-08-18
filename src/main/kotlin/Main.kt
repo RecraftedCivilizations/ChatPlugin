@@ -2,6 +2,7 @@ package com.github.DarkVanityOfLight.ChattPlugin
 
 import com.github.DarkVanityOfLight.ChattPlugin.chats.PlayerChat
 import com.github.DarkVanityOfLight.ChattPlugin.chats.SpyChat
+import com.github.DarkVanityOfLight.ChattPlugin.commands.MuteChannel
 import com.github.DarkVanityOfLight.ChattPlugin.commands.SwitchChannel
 import com.github.DarkVanityOfLight.ChattPlugin.listeners.ChatListener
 import com.github.DarkVanityOfLight.ChattPlugin.parser.ConfigParser
@@ -82,6 +83,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         Bukkit.getPluginManager().registerEvents(this, this)
         Bukkit.getPluginManager().registerEvents(ChatListener(this), this)
         this.getCommand("spy")?.setExecutor(spyChat)
+        this.getCommand("mute")?.setExecutor(MuteChannel(this))
     }
 
     @EventHandler
