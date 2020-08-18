@@ -9,6 +9,7 @@ class PlayerChat : Chat{
     override var format : String
     private var radius : Int = 0
     var ignoreWorld = true
+    var name : String = ""
     override var main : Main
 
     constructor(name : String, list_style : String, ignoreWorld : Boolean, format : String, muteable : Boolean, radius : Int, main: Main){
@@ -16,11 +17,13 @@ class PlayerChat : Chat{
         this.ignoreWorld = ignoreWorld
         this.radius = radius
         this.main = main
+        this.name = name
     }
     constructor(name: String, list_style: String, format: String, muteable: Boolean, radius: Int, main: Main){
         this.radius = radius
         this.format = format
         this.main = main
+        this.name = name
     }
 
     override fun sendMessage(message : String, sender : Player, channelName: String?){
@@ -30,6 +33,8 @@ class PlayerChat : Chat{
         for (player in players){
             player.sendMessage(assembledMessage)
         }
+
+        main.spyChat.sendMessage(message, sender, name)
 
     }
 

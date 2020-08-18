@@ -28,7 +28,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     val chats : MutableMap<String, PlayerChat> = emptyMap<String, PlayerChat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)
     private val chatLog : File = File(this.dataFolder.absolutePath + "/log.lst")
-    private lateinit var spyChat: SpyChat
+    lateinit var spyChat: SpyChat
     var factionsEnabled: Boolean = false
 
     override fun onEnable(){
