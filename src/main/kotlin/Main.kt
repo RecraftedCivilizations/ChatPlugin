@@ -2,6 +2,7 @@ package com.github.DarkVanityOfLight.ChattPlugin
 
 import com.github.DarkVanityOfLight.ChattPlugin.chats.PlayerChat
 import com.github.DarkVanityOfLight.ChattPlugin.chats.SpyChat
+import com.github.DarkVanityOfLight.ChattPlugin.commands.ListChannels
 import com.github.DarkVanityOfLight.ChattPlugin.commands.MuteChannel
 import com.github.DarkVanityOfLight.ChattPlugin.commands.SwitchChannel
 import com.github.DarkVanityOfLight.ChattPlugin.commands.UnmuteChannel
@@ -86,6 +87,10 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         this.getCommand("spy")?.setExecutor(spyChat)
         this.getCommand("mute")?.setExecutor(MuteChannel(this))
         this.getCommand("unmute")?.setExecutor(UnmuteChannel(this))
+
+        val chatArray = emptyArray<PlayerChat>()
+        chats.keys.forEachIndexed { pos, key -> chatArray[pos] = chats[key]!! }
+        this.getCommand("list_channels")?.setExecutor(ListChannels(chatArray))
     }
 
     @EventHandler
