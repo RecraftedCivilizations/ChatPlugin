@@ -65,18 +65,17 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
                     chats[channel.toUpperCase()] = PlayerChat(
                             properties["name"] as String, properties["list_style"] as String,
                             properties["ignore_world"] as Boolean, properties["format"] as String,
-                            properties["muteable"] as Boolean, properties["radius"] as Int, this)
+                            properties["muteable"] as Boolean, properties["radius"] as Int, this, channel)
                 } else{
                     chats[channel.toUpperCase()] = PlayerChat(
                             properties["name"] as String, properties["list_style"] as String,
                             properties["format"] as String, properties["muteable"] as Boolean,
-                            properties["radius"] as Int, this)
+                            properties["radius"] as Int, this, channel)
                 }
                 // Register our commands without plugin.yml
                 commandMap.register(channel, SwitchChannel(
                         channel, properties["list_style"] as String, "/$channel",
-                        "chatPlugin.commands.switchChannel", ArrayList(), this
-                ))
+                        "chatPlugin.commands.switchChannel", ArrayList(), this))
             }else {
                 Bukkit.getLogger().warning("No properties ofr $channel, please specify some")
             }
