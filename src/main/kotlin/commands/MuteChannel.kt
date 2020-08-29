@@ -17,7 +17,8 @@ class MuteChannel(val main: Main) : CommandExecutor {
                 val uppercaseIt = it.toUpperCase()
                 if (main.chats[uppercaseIt] != null) {
                     if (main.chats[uppercaseIt]!!.muteable){
-                        muteable.add(main.chats[uppercaseIt]!!.name)
+                        muteable.add(main.chats[uppercaseIt]!!.channelName)
+                        main.debug_log(main.chats[uppercaseIt]!!.channelName)
                     }else {
                         sender.sendMessage("Channel $uppercaseIt is not muteable")
                     }
