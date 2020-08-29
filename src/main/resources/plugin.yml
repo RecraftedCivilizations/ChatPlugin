@@ -24,3 +24,7 @@ commands:
   unmute:
     description: Unmute a given channel
     usage: /unmute <channel> <names>
+
+  list_channels:
+    description: List all available channels
+    usage: /list_channels
