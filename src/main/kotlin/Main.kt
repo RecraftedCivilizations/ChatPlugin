@@ -104,4 +104,8 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     fun log(message : String){
         chatLog.appendText(message + "\n")
     }
+
+    fun debug_log(message: String){
+        Bukkit.getLogger().info("Debug: $message")
+    }
 }

@@ -13,7 +13,7 @@ class ListChannels(val channels: Array<PlayerChat>) : CommandExecutor {
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        sender.sendMessage("These are all channels: $channels")
+        sender.sendMessage("These are all channels:")
 
         formatedChannels.forEach { channel -> sender.sendMessage(channel) }
         return true
