@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.DarkVanityOfLight.ChatPlugin'
-version '1.5.5-PRERELEASE'
+version '1.5.6-PRERELEASE'
 
 repositories {
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
