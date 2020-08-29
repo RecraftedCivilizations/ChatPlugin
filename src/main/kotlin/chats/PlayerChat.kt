@@ -12,6 +12,7 @@ class PlayerChat : Chat{
     var ignoreWorld = true
     var name : String = ""
     var muteable : Boolean = false
+    var list_style : String = ""
     override var main : Main
 
     constructor(name : String, list_style : String, ignoreWorld : Boolean, format : String, muteable : Boolean, radius : Int, main: Main){
@@ -21,6 +22,7 @@ class PlayerChat : Chat{
         this.main = main
         this.name = name
         this.muteable = muteable
+        this.list_style = list_style
     }
     constructor(name: String, list_style: String, format: String, muteable: Boolean, radius: Int, main: Main){
         this.radius = radius
@@ -28,6 +30,7 @@ class PlayerChat : Chat{
         this.main = main
         this.name = name
         this.muteable = muteable
+        this.list_style = list_style
     }
 
     override fun sendMessage(message : String, sender : Player, channelName: String?){
