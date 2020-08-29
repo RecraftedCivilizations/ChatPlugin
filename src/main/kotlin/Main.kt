@@ -62,12 +62,12 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
             val properties = configParser.chatProperties[channel]
             if (properties != null) {
                 if ("ignore_world" in properties.keys){
-                    chats[channel] = PlayerChat(
+                    chats[channel.toUpperCase()] = PlayerChat(
                             properties["name"] as String, properties["list_style"] as String,
                             properties["ignore_world"] as Boolean, properties["format"] as String,
                             properties["muteable"] as Boolean, properties["radius"] as Int, this)
                 } else{
-                    chats[channel] = PlayerChat(
+                    chats[channel.toUpperCase()] = PlayerChat(
                             properties["name"] as String, properties["list_style"] as String,
                             properties["format"] as String, properties["muteable"] as Boolean,
                             properties["radius"] as Int, this)
