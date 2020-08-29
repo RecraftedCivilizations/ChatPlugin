@@ -88,9 +88,10 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         this.getCommand("mute")?.setExecutor(MuteChannel(this))
         this.getCommand("unmute")?.setExecutor(UnmuteChannel(this))
 
-        val chatArray = emptyArray<PlayerChat>()
-        chats.keys.forEachIndexed { pos, key -> chatArray[pos] = chats[key]!! }
-        this.getCommand("list_channels")?.setExecutor(ListChannels(chatArray))
+        val chatList = Array<PlayerChat?>(chats.keys.size) { null }
+        chats.keys.forEachIndexed { pos, key -> chatList[pos] = chats[key]!! }
+        val nonNullChats = Array<PlayerChat>(chats.keys.size) { pos -> chatList[pos]!! }
+        this.getCommand("list_channels")?.setExecutor(ListChannels(nonNullChats))
     }
 
     @EventHandler
