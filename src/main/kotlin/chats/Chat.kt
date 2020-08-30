@@ -35,7 +35,6 @@ abstract class Chat : Chatable {
             message.replace("%deaths%", deaths)
 
 
-        } else {
         }
 
         form = form.replace("%player_name%", sender.name)
