@@ -1,18 +1,13 @@
 package com.github.DarkVanityOfLight.ChattPlugin.chats
 
-import com.github.DarkVanityOfLight.ChattPlugin.Main
 import com.massivecraft.factions.FPlayers
-import com.massivecraft.factions.FactionsPlugin
-import net.luckperms.api.LuckPerms
 import net.luckperms.api.cacheddata.CachedMetaData
 import net.luckperms.api.model.user.User
 import net.luckperms.api.query.QueryOptions
-import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
-import java.util.*
 
-abstract class Chat : Chatable {
+abstract class Chat : IChat {
 
     override fun assembleMessage(message: String, sender : Player) : String {
         var form = format

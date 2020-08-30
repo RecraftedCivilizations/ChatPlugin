@@ -4,7 +4,7 @@ import com.github.DarkVanityOfLight.ChattPlugin.Main
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 
-interface Chatable {
+interface IChat {
     var format : String
     var main: Main
     var channelName: String
