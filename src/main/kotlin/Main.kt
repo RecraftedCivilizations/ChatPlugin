@@ -9,22 +9,17 @@ import com.github.DarkVanityOfLight.ChattPlugin.commands.UnmuteChannel
 import com.github.DarkVanityOfLight.ChattPlugin.listeners.ChatListener
 import com.github.DarkVanityOfLight.ChattPlugin.parser.ConfigParser
 import com.github.DarkVanityOfLight.ChattPlugin.parser.DataParser
-import com.massivecraft.factions.FPlayer
-import com.massivecraft.factions.FPlayers
-import com.massivecraft.factions.struct.ChatMode
-import com.sun.org.apache.xpath.internal.operations.Bool
+import net.luckperms.api.LuckPerms
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandMap
-import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
-import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
-import org.bukkit.event.player.AsyncPlayerChatEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 import java.lang.reflect.Field
+
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
     val configParser : ConfigParser = ConfigParser(this)
@@ -34,6 +29,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     lateinit var spyChat: SpyChat
     var factionsEnabled: Boolean = false
     var luckPermsEnabled: Boolean = false
+    var luckPermApi : LuckPerms? = null
 
     override fun onEnable(){
 
@@ -44,7 +40,16 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("Factions")) factionsEnabled = true
-        if (Bukkit.getPluginManager().isPluginEnabled("LuckPerms")) luckPermsEnabled = true
+        if (Bukkit.getPluginManager().isPluginEnabled("LuckPerms")){
+            luckPermsEnabled = true
+
+            val luckPermProvider = Bukkit.getServicesManager().getRegistration(
+                LuckPerms::class.java
+            )
+            if (luckPermProvider != null) {
+                val luckPermApi = luckPermProvider.provider
+            }
+        }
 
         // Check if data file exists if not create
         val f = File(dataFolder.absolutePath + "/data.yml")
@@ -65,19 +70,24 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
             if (properties != null) {
                 if ("ignore_world" in properties.keys){
                     chats[channel.toUpperCase()] = PlayerChat(
-                            properties["name"] as String, properties["list_style"] as String,
-                            properties["ignore_world"] as Boolean, properties["format"] as String,
-                            properties["muteable"] as Boolean, properties["radius"] as Int, this, channel)
+                        properties["name"] as String, properties["list_style"] as String,
+                        properties["ignore_world"] as Boolean, properties["format"] as String,
+                        properties["muteable"] as Boolean, properties["radius"] as Int, this, channel
+                    )
                 } else{
                     chats[channel.toUpperCase()] = PlayerChat(
-                            properties["name"] as String, properties["list_style"] as String,
-                            properties["format"] as String, properties["muteable"] as Boolean,
-                            properties["radius"] as Int, this, channel)
+                        properties["name"] as String, properties["list_style"] as String,
+                        properties["format"] as String, properties["muteable"] as Boolean,
+                        properties["radius"] as Int, this, channel
+                    )
                 }
                 // Register our commands without plugin.yml
-                commandMap.register(channel, SwitchChannel(
+                commandMap.register(
+                    channel, SwitchChannel(
                         channel, properties["list_style"] as String, "/$channel",
-                        "chatPlugin.commands.switchChannel", ArrayList(), this))
+                        "chatPlugin.commands.switchChannel", ArrayList(), this
+                    )
+                )
             }else {
                 Bukkit.getLogger().warning("No properties ofr $channel, please specify some")
             }
@@ -102,7 +112,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         }
     }
 
-    fun log(message : String){
+    fun log(message: String){
         chatLog.appendText(message + "\n")
     }
 

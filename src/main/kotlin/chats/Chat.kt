@@ -3,9 +3,14 @@ package com.github.DarkVanityOfLight.ChattPlugin.chats
 import com.github.DarkVanityOfLight.ChattPlugin.Main
 import com.massivecraft.factions.FPlayers
 import com.massivecraft.factions.FactionsPlugin
+import net.luckperms.api.LuckPerms
+import net.luckperms.api.cacheddata.CachedMetaData
+import net.luckperms.api.model.user.User
+import net.luckperms.api.query.QueryOptions
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
+import java.util.*
 
 abstract class Chat : Chatable {
 
@@ -38,7 +43,13 @@ abstract class Chat : Chatable {
         }
 
         if (main.luckPermsEnabled){
-
+            var user : User? = main.luckPermApi!!.userManager.getUser(sender.uniqueId)
+            if (user != null) {
+                val queryOption : QueryOptions = main.luckPermApi!!.contextManager.getQueryOptions(sender)
+                val metadata : CachedMetaData = user.cachedData.getMetaData(queryOption);
+                metadata.prefix?.let { form.replace("%prefix%", it) }
+                metadata.suffix?.let { form.replace("%suffix%", it) }
+            }
         }
 
         form = form.replace("%player_name%", sender.name)
