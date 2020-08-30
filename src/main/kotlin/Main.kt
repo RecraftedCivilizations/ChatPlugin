@@ -33,6 +33,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     private val chatLog : File = File(this.dataFolder.absolutePath + "/log.lst")
     lateinit var spyChat: SpyChat
     var factionsEnabled: Boolean = false
+    var luckPermsEnabled: Boolean = false
 
     override fun onEnable(){
 
@@ -43,6 +44,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("Factions")) factionsEnabled = true
+        if (Bukkit.getPluginManager().isPluginEnabled("LuckPerms")) luckPermsEnabled = true
 
         // Check if data file exists if not create
         val f = File(dataFolder.absolutePath + "/data.yml")
