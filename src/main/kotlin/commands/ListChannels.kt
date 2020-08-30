@@ -9,7 +9,7 @@ class ListChannels(val channels: Array<PlayerChat>) : CommandExecutor {
     private lateinit var formatedChannels : Array<String>
 
     init {
-        formatedChannels = Array(channels.size) { pos -> channels[pos].list_style }
+        formatedChannels = Array(channels.size) { pos -> channels[pos].listStyle }
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {

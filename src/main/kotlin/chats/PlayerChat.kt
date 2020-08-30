@@ -7,14 +7,14 @@ import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
 class PlayerChat : Chat{
-    override var format : String
     private var radius : Int = 0
     var ignoreWorld = true
     var name : String = ""
     var muteable : Boolean = false
-    var list_style : String = ""
-    var channelName : String = ""
+    var listStyle : String = ""
     override var main : Main
+    override var channelName: String
+    override var format: String
 
     constructor(name : String, list_style : String, ignoreWorld : Boolean, format : String, muteable : Boolean, radius : Int, main: Main, channelName : String){
         this.format = format
@@ -23,7 +23,7 @@ class PlayerChat : Chat{
         this.main = main
         this.name = name
         this.muteable = muteable
-        this.list_style = list_style
+        this.listStyle = list_style
         this.channelName = channelName
     }
     constructor(name: String, list_style: String, format: String, muteable: Boolean, radius: Int, main: Main, channelName : String){
@@ -32,11 +32,11 @@ class PlayerChat : Chat{
         this.main = main
         this.name = name
         this.muteable = muteable
-        this.list_style = list_style
+        this.listStyle = list_style
         this.channelName = channelName
     }
 
-    override fun sendMessage(message : String, sender : Player, channelName: String?){
+    override fun sendMessage(message : String, sender : Player){
         val players : List<Player> = getPlayersInRange(sender)
         val assembledMessage : String = assembleMessage(message, sender)
 
@@ -46,10 +46,10 @@ class PlayerChat : Chat{
 
         if (main.factionsEnabled){
             if (FPlayers.getInstance().getByPlayer(sender).chatMode != ChatMode.PUBLIC || !ignoreWorld) {
-                main.spyChat.sendMessage(message, sender, name)
+                main.spyChat.sendMessage(message, sender, channelName)
             }
         } else if (!ignoreWorld){
-            main.spyChat.sendMessage(message, sender, name)
+            main.spyChat.sendMessage(message, sender, channelName)
         }
 
     }
@@ -58,16 +58,29 @@ class PlayerChat : Chat{
         val players = mutableListOf<Player>()
 
         if (this.ignoreWorld){
-            return Bukkit.getOnlinePlayers().toList()
-        }
-
-        for (player in Bukkit.getOnlinePlayers()){
-            if (player.location.distance(sender.location) <= this.radius){
-                if (name !in main.dataParser.getStringList("Mutet-Channels.${sender.name}"))
-                    players.add(player)
+            players +=  Bukkit.getOnlinePlayers().toList()
+        }else {
+            for (player in Bukkit.getOnlinePlayers()){
+                if (player.location.distance(sender.location) <= this.radius){
+                        players.add(player)
+                }
             }
         }
 
+        players.removeAll(getMutetPlayers())
+
         return players
+    }
+
+    fun getMutetPlayers() : Set<Player>{
+        val mutePlayers = emptySet<Player>().toMutableSet()
+
+        for (player in Bukkit.getOnlinePlayers()){
+            if (channelName in main.dataParser.getStringList("Mutet-Channels.${player.name}")){
+                mutePlayers.add(player)
+            }
+        }
+
+        return mutePlayers
     }
 }

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player
 
 abstract class Chat : Chatable {
 
-    override fun assembleMessage(message: String, sender : Player, channelName: String?) : String {
+    override fun assembleMessage(message: String, sender : Player) : String {
         var form = format
 
         if (main.factionsEnabled){
@@ -43,10 +43,7 @@ abstract class Chat : Chatable {
         form = form.replace("%player_name%", sender.name)
         form = form.replace("%message%", message)
         form = form.replace("%nickname%", sender.displayName)
-
-        if (channelName != null){
-            form = form.replace("%channel_name%", channelName)
-        }
+        form = form.replace("%channel_name%", channelName)
 
         form = ChatColor.translateAlternateColorCodes('&', form)
         return form

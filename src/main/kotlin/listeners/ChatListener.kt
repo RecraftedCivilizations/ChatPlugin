@@ -33,11 +33,12 @@ class ChatListener(private val main: Main) : Listener {
             val chatMode = FPlayers.getInstance().getByPlayer(event.player).chatMode
 
             if (chat.ignoreWorld) {
-                event.format = String.format(chat.assembleMessage(event.message, event.player, channel))
+                event.format = String.format(chat.assembleMessage(event.message, event.player))
+                event.recipients.removeAll(chat.getMutetPlayers())
                 return
             } else {
                 event.isCancelled = true
-                chat.sendMessage(event.message, event.player, channel)
+                chat.sendMessage(event.message, event.player)
                 return
             }
         }else{
