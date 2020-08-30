@@ -36,11 +36,7 @@ abstract class Chat : Chatable {
 
 
         } else {
-            Bukkit.getLogger().info("Factions plugin is not enabled on this server you cannot use:\n" +
-                    "%role_prefix%, %role%, %faction_tag%, %title%, %deaths%")
         }
-
-        if (main.luckPermsEnabled)
 
         form = form.replace("%player_name%", sender.name)
         form = form.replace("%message%", message)
