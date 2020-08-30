@@ -11,13 +11,14 @@ import org.bukkit.entity.Player
 
 class SpyChat(override var main: Main) : CommandExecutor, Chat() {
     override var format: String = main.configParser.spyFormat!!
+    override var channelName: String = "SpyChat"
 
 
-    override fun sendMessage(message : String, sender : Player, channelName: String?) {
+    override fun sendMessage(message : String, sender : Player) {
         val spyPlayer = main.dataParser.spyPlayer
         val sendToPlayers = emptySet<Player>().toMutableSet()
 
-        val asmMessage = assembleMessage(message, sender, channelName)
+        val asmMessage = assembleMessage(message, sender, )
 
         Bukkit.getOnlinePlayers().forEach{ player -> if (player.name in spyPlayer) sendToPlayers.add(player)}
 

@@ -46,12 +46,13 @@ class PlayerChat : Chat{
 
         if (main.factionsEnabled){
             if (FPlayers.getInstance().getByPlayer(sender).chatMode != ChatMode.PUBLIC || !ignoreWorld) {
-                main.spyChat.sendMessage(message, sender, channelName)
+                main.spyChat.sendMessage(message, sender)
             }
         } else if (!ignoreWorld){
-            main.spyChat.sendMessage(message, sender, channelName)
+            main.spyChat.sendMessage(message, sender)
         }
 
+        main.debug_log("Recipients are: $players")
     }
 
     private fun getPlayersInRange(sender: Player) : List<Player>{
