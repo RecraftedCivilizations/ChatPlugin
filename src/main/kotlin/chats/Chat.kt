@@ -37,6 +37,10 @@ abstract class Chat : Chatable {
 
         }
 
+        if (main.luckPermsEnabled){
+
+        }
+
         form = form.replace("%player_name%", sender.name)
         form = form.replace("%message%", message)
         form = form.replace("%nickname%", sender.displayName)
