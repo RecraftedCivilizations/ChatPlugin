@@ -47,7 +47,9 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
                 LuckPerms::class.java
             )
             if (luckPermProvider != null) {
-                val luckPermApi = luckPermProvider.provider
+                luckPermApi = luckPermProvider.provider
+            }else{
+                Bukkit.getLogger().warning("Could not get the Lucky perm api even though lucky perms is enabled")
             }
         }
 
