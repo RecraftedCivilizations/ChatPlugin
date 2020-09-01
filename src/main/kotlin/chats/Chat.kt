@@ -47,12 +47,11 @@ abstract class Chat : IChat {
                     form.replace("%prefix%", metadata.prefix!!)
                 }else{
                     form.replace("%prefix%", "")
-                    Bukkit.getLogger().warning("No prefix found for player ${sender.name}")
                 }
                 if (metadata.suffix != null){
                     form.replace("%suffix%", metadata.suffix!!)
                 }else {
-                    Bukkit.getLogger().warning("No suffix found for player ${sender.name}")
+                    form.replace("%suffix%", "")
                 }
             }
         }
