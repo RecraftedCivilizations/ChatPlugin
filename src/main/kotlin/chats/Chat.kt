@@ -24,17 +24,17 @@ abstract class Chat : IChat {
             val title = fPlayer.title
             val deaths = fPlayer.deaths.toString()
 
-            form.replace("%role_prefix%", rolePrefix)
-            form.replace("%role%", role)
-            form.replace("%faction_tag%", factionTag)
-            form.replace("%title%", title)
-            form.replace("%deaths%", deaths)
+            form.replace("{role_prefix}", rolePrefix)
+            form.replace("{role}", role)
+            form.replace("{faction_tag}", factionTag)
+            form.replace("{title}", title)
+            form.replace("{deaths}", deaths)
 
-            message.replace("%role_prefix%", rolePrefix)
-            message.replace("%role%", role)
-            message.replace("%faction_tag%", factionTag)
-            message.replace("%title%", title)
-            message.replace("%deaths%", deaths)
+            message.replace("{role_prefix}", rolePrefix)
+            message.replace("{role}", role)
+            message.replace("{faction_tag}", factionTag)
+            message.replace("{title}", title)
+            message.replace("{deaths}", deaths)
 
 
         }
@@ -44,22 +44,22 @@ abstract class Chat : IChat {
             if (user != null) {
                 val metadata : CachedMetaData = user.cachedData.metaData
                 if (metadata.prefix != null){
-                    form.replace("%prefix%", metadata.prefix!!)
+                    form.replace("{prefix}", metadata.prefix!!)
                 }else{
-                    form.replace("%prefix%", "")
+                    form.replace("{prefix}", "")
                 }
                 if (metadata.suffix != null){
-                    form.replace("%suffix%", metadata.suffix!!)
+                    form.replace("{suffix}", metadata.suffix!!)
                 }else {
-                    form.replace("%suffix%", "")
+                    form.replace("{suffix}", "")
                 }
             }
         }
 
-        form = form.replace("%player_name%", sender.name)
-        form = form.replace("%message%", message)
-        form = form.replace("%nickname%", sender.displayName)
-        form = form.replace("%channel_name%", channelName)
+        form = form.replace("{player_name}", sender.name)
+        form = form.replace("{message}", message)
+        form = form.replace("{nickname}", sender.displayName)
+        form = form.replace("{channel_name}", channelName)
 
         form = ChatColor.translateAlternateColorCodes('&', form)
         return form
