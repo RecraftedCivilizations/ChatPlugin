@@ -4,8 +4,10 @@ import com.massivecraft.factions.FPlayers
 import net.luckperms.api.cacheddata.CachedMetaData
 import net.luckperms.api.model.user.User
 import net.luckperms.api.query.QueryOptions
+import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
+import org.bukkit.util.io.BukkitObjectInputStream
 
 abstract class Chat : IChat {
 
@@ -38,12 +40,20 @@ abstract class Chat : IChat {
         }
 
         if (main.luckPermsEnabled){
-            var user : User? = main.luckPermApi!!.userManager.getUser(sender.uniqueId)
+            val user : User? = main.luckPermApi!!.userManager.getUser(sender.uniqueId)
             if (user != null) {
-                val queryOption : QueryOptions = main.luckPermApi!!.contextManager.getQueryOptions(sender)
-                val metadata : CachedMetaData = user.cachedData.getMetaData(queryOption);
-                metadata.prefix?.let { form.replace("%prefix%", it) }
-                metadata.suffix?.let { form.replace("%suffix%", it) }
+                val metadata : CachedMetaData = user.cachedData.metaData
+                if (metadata.prefix != null){
+                    form.replace("%prefix%", metadata.prefix!!)
+                }else{
+                    form.replace("%prefix%", "")
+                    Bukkit.getLogger().warning("No prefix found for player ${sender.name}")
+                }
+                if (metadata.suffix != null){
+                    form.replace("%suffix%", metadata.suffix!!)
+                }else {
+                    Bukkit.getLogger().warning("No suffix found for player ${sender.name}")
+                }
             }
         }
 
