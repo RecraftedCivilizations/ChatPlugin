@@ -12,6 +12,7 @@ abstract class Chat : IChat {
 
     override fun assembleMessage(message: String, sender: Player) : String {
         var form = format
+        var message : String = message
 
         if (main.factionsEnabled){
             val fPlayer = FPlayers.getInstance().getByPlayer(sender)
@@ -29,11 +30,11 @@ abstract class Chat : IChat {
             form = form.replace("{title}", title)
             form = form.replace("{deaths}", deaths)
 
-            message.replace("{role_prefix}", rolePrefix)
-            message.replace("{role}", role)
-            message.replace("{faction_tag}", factionTag)
-            message.replace("{title}", title)
-            message.replace("{deaths}", deaths)
+            message = message.replace("{role_prefix}", rolePrefix)
+            message = message.replace("{role}", role)
+            message = message.replace("{faction_tag}", factionTag)
+            message = message.replace("{title}", title)
+            message = message.replace("{deaths}", deaths)
 
 
         }
