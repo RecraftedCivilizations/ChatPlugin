@@ -1,17 +1,16 @@
 package com.github.DarkVanityOfLight.ChattPlugin.chats
 
 import com.massivecraft.factions.FPlayers
-import net.luckperms.api.cacheddata.CachedMetaData
 import net.luckperms.api.model.user.User
 import net.luckperms.api.query.QueryOptions
-import org.bukkit.Bukkit
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
-import org.bukkit.util.io.BukkitObjectInputStream
+import sun.audio.AudioPlayer.player
+
 
 abstract class Chat : IChat {
 
-    override fun assembleMessage(message: String, sender : Player) : String {
+    override fun assembleMessage(message: String, sender: Player) : String {
         var form = format
 
         if (main.factionsEnabled){
@@ -24,11 +23,11 @@ abstract class Chat : IChat {
             val title = fPlayer.title
             val deaths = fPlayer.deaths.toString()
 
-            form.replace("{role_prefix}", rolePrefix)
-            form.replace("{role}", role)
-            form.replace("{faction_tag}", factionTag)
-            form.replace("{title}", title)
-            form.replace("{deaths}", deaths)
+            form = form.replace("{role_prefix}", rolePrefix)
+            form = form.replace("{role}", role)
+            form = form.replace("{faction_tag}", factionTag)
+            form = form.replace("{title}", title)
+            form = form.replace("{deaths}", deaths)
 
             message.replace("{role_prefix}", rolePrefix)
             message.replace("{role}", role)
@@ -42,16 +41,14 @@ abstract class Chat : IChat {
         if (main.luckPermsEnabled){
             val user : User? = main.luckPermApi!!.userManager.getUser(sender.uniqueId)
             if (user != null) {
-                val metadata : CachedMetaData = user.cachedData.metaData
-                if (metadata.prefix != null){
-                    form.replace("{prefix}", metadata.prefix!!)
-                }else{
-                    form.replace("{prefix}", "")
-                }
-                if (metadata.suffix != null){
-                    form.replace("{suffix}", metadata.suffix!!)
+                val queryOptions: QueryOptions = main.luckPermApi!!.contextManager.getQueryOptions(sender)
+                val metaData = user.cachedData.getMetaData(queryOptions)
+
+                val prefix: String? = metaData.prefix
+                form = if (prefix != null){
+                    form.replace("{prefix}", prefix)
                 }else {
-                    form.replace("{suffix}", "")
+                    form.replace("{prefix}", "")
                 }
             }
         }
