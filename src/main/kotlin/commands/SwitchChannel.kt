@@ -13,6 +13,7 @@ class SwitchChannel(private val channelName: String, description: String, usage:
         if (sender is Player){
                 if (args.isEmpty()) {
                     main.dataParser.setData("Player-Channels.${sender.name}", channelName)
+                    main.chats[channelName]?.name?.let { sender.sendMessage(it) }
                 }else {
                     val result = args.joinToString(" ")
                     main.chats[channelName]?.sendMessage(result, sender)
