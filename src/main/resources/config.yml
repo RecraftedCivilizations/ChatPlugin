@@ -16,3 +16,5 @@ Channels:
     ignore_world: false
     format: '[IC] {player_name} >> {message}'
     muteable: true
+
+overwrite: false
