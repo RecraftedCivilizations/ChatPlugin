@@ -9,6 +9,7 @@ class ConfigParser(private val main: Main) {
     lateinit var chatProperties : MutableMap<String, Map<String, Any>>
     lateinit var defaultChannel : String
     lateinit var config : FileConfiguration
+    var overwrite : Boolean? = null
     var spyFormat : String? = null
 
     fun read(){
@@ -17,7 +18,13 @@ class ConfigParser(private val main: Main) {
 
         chatProperties = emptyMap<String, Map<String, Any>>().toMutableMap()
 
-        config = main.getConfig()
+        config = main.config
+
+        val unasertedOverwrite : Boolean? = config.getBoolean("overwrite")
+
+        if (unasertedOverwrite == null){
+            overwrite = false
+        }
 
         spyFormat = config.getString("spy-format")
         if (spyFormat == null){
@@ -42,6 +49,8 @@ class ConfigParser(private val main: Main) {
         }else {
             Bukkit.getLogger().warning("You did not define a default channel")
         }
+
+
     }
 
 }

@@ -83,13 +83,15 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
                         properties["radius"] as Int, this, channel
                     )
                 }
-                // Register our commands without plugin.yml
-                commandMap.register(
-                    channel, SwitchChannel(
-                        channel, properties["list_style"] as String, "/$channel",
-                        "chatPlugin.commands.switchChannel", ArrayList(), this
+                if (!configParser.overwrite){
+                    // Register our commands without plugin.yml
+                    commandMap.register(
+                        channel, SwitchChannel(
+                            channel, properties["list_style"] as String, "/$channel",
+                            "chatPlugin.commands.switchChannel", ArrayList(), this
+                        )
                     )
-                )
+                }
             }else {
                 Bukkit.getLogger().warning("No properties ofr $channel, please specify some")
             }
