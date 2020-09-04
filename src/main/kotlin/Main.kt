@@ -111,7 +111,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
 
         // Start a task to register our commands if overwrite is true
         if (configParser.overwrite!!) {
-            Bukkit.getScheduler().runTaskLater()
+            Bukkit.getScheduler().runTaskLater(this, CommandRegistry(this), 0L)
         }
     }
 
