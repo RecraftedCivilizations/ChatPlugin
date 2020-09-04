@@ -7,7 +7,7 @@ import org.bukkit.command.CommandMap
 import org.bukkit.scheduler.BukkitRunnable
 import java.lang.reflect.Field
 
-class CommandRegistry(val main : Main) : BukkitRunnable() {
+class CommandRegistry(val main : Main) : Runnable {
 
     override fun run() {
         val bukkitCommandMap: Field = Bukkit.getServer().javaClass.getDeclaredField("commandMap")

@@ -19,6 +19,7 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 import java.lang.reflect.Field
+import com.github.DarkVanityOfLight.ChattPlugin.runnables.CommandRegistry
 
 
 class Main : JavaPlugin(), Listener, CommandExecutor{
@@ -83,7 +84,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
                         properties["radius"] as Int, this, channel
                     )
                 }
-                if (!configParser.overwrite){
+                if (!configParser.overwrite!!){
                     // Register our commands without plugin.yml
                     commandMap.register(
                         channel, SwitchChannel(
@@ -107,6 +108,11 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         chats.keys.forEachIndexed { pos, key -> chatList[pos] = chats[key]!! }
         val nonNullChats = Array<PlayerChat>(chats.keys.size) { pos -> chatList[pos]!! }
         this.getCommand("list_channels")?.setExecutor(ListChannels(nonNullChats))
+
+        // Start a task to register our commands if overwrite is true
+        if (configParser.overwrite!!) {
+            Bukkit.getScheduler().runTaskLater()
+        }
     }
 
     @EventHandler
