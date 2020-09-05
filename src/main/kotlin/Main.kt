@@ -7,6 +7,7 @@ import com.github.DarkVanityOfLight.ChattPlugin.commands.MuteChannel
 import com.github.DarkVanityOfLight.ChattPlugin.commands.SwitchChannel
 import com.github.DarkVanityOfLight.ChattPlugin.commands.UnmuteChannel
 import com.github.DarkVanityOfLight.ChattPlugin.listeners.ChatListener
+import com.github.DarkVanityOfLight.ChattPlugin.listeners.ServerLoadListener
 import com.github.DarkVanityOfLight.ChattPlugin.parser.ConfigParser
 import com.github.DarkVanityOfLight.ChattPlugin.parser.DataParser
 import net.luckperms.api.LuckPerms
@@ -111,7 +112,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
 
         // Start a task to register our commands if overwrite is true
         if (configParser.overwrite!!) {
-            Bukkit.getScheduler().runTaskLater(this, CommandRegistry(this), 0L)
+            Bukkit.getPluginManager().registerEvents(ServerLoadListener(this), this)
         }
     }
 
