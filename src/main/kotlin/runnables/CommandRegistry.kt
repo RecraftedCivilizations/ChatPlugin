@@ -7,6 +7,7 @@ import org.bukkit.command.CommandMap
 import org.bukkit.scheduler.BukkitRunnable
 import java.lang.reflect.Field
 
+@Deprecated("Use the command preprocess Event")
 class CommandRegistry(val main : Main) : Runnable {
 
     override fun run() {
