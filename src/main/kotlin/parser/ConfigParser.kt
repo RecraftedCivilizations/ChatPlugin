@@ -20,11 +20,12 @@ class ConfigParser(private val main: Main) {
 
         config = main.config
 
-        val unasertedOverwrite : Boolean? = config.getBoolean("overwrite")
+        overwrite = config.getBoolean("overwrite")
 
-        if (unasertedOverwrite == null){
+        if (overwrite == null){
             overwrite = false
         }
+        overwrite!!
 
         spyFormat = config.getString("spy-format")
         if (spyFormat == null){
