@@ -19,10 +19,11 @@ import org.bukkit.event.player.PlayerJoinEvent
 import java.io.File
 import java.lang.reflect.Field
 import com.github.darkvanityoflight.darkmodcore.ADarkMod
+import com.github.darkvanityoflight.darkmodcore.configparser.ADarkModConfigParser
 
 
 class Main : ADarkMod(), Listener {
-    val configParser : ConfigParser = ConfigParser(this)
+    override var configParser : ADarkModConfigParser = ConfigParser(this)
     val chats : MutableMap<String, PlayerChat> = emptyMap<String, PlayerChat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)
     private val chatLog : File = File(this.dataFolder.absolutePath + "/log.lst")
