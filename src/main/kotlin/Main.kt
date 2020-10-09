@@ -21,9 +21,10 @@ import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 import java.lang.reflect.Field
 import com.github.DarkVanityOfLight.ChattPlugin.runnables.CommandRegistry
+import com.github.darkvanityoflight.darkmodcore.ADarkMod
 
 
-class Main : JavaPlugin(), Listener, CommandExecutor{
+class Main : ADarkMod(), Listener {
     val configParser : ConfigParser = ConfigParser(this)
     val chats : MutableMap<String, PlayerChat> = emptyMap<String, PlayerChat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)
@@ -34,7 +35,7 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
     var luckPermApi : LuckPerms? = null
 
     override fun onEnable(){
-
+        super.onEnable()
         configParser.read()
 
         if (!chatLog.exists()){
@@ -123,11 +124,4 @@ class Main : JavaPlugin(), Listener, CommandExecutor{
         }
     }
 
-    fun log(message: String){
-        chatLog.appendText(message + "\n")
-    }
-
-    fun debug_log(message: String){
-        Bukkit.getLogger().info("Debug: $message")
-    }
 }
