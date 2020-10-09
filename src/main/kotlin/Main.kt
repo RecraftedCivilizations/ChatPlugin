@@ -23,7 +23,7 @@ import com.github.darkvanityoflight.darkmodcore.configparser.ADarkModConfigParse
 
 
 class Main : ADarkMod(), Listener {
-    override var configParser : ADarkModConfigParser = ConfigParser(this)
+    var configParser : ConfigParser = ConfigParser(this)
     val chats : MutableMap<String, PlayerChat> = emptyMap<String, PlayerChat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)
     private val chatLog : File = File(this.dataFolder.absolutePath + "/log.lst")
@@ -31,6 +31,10 @@ class Main : ADarkMod(), Listener {
     var factionsEnabled: Boolean = false
     var luckPermsEnabled: Boolean = false
     var luckPermApi : LuckPerms? = null
+
+    init {
+        val configParser : ConfigParser = configParser as ConfigParser
+    }
 
     override fun onEnable(){
         super.onEnable()
