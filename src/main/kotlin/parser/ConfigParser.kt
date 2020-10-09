@@ -1,10 +1,11 @@
 package com.github.DarkVanityOfLight.ChattPlugin.parser
 
 import com.github.DarkVanityOfLight.ChattPlugin.Main
+import com.github.darkvanityoflight.darkmodcore.configparser.ADarkModConfigParser
 import org.bukkit.Bukkit
 import org.bukkit.configuration.file.FileConfiguration
 
-class ConfigParser(private val main: Main) {
+class ConfigParser(private val main: Main) : ADarkModConfigParser() {
     lateinit var chats: List<String>
     lateinit var chatProperties : MutableMap<String, Map<String, Any>>
     lateinit var defaultChannel : String
@@ -12,7 +13,7 @@ class ConfigParser(private val main: Main) {
     var overwrite : Boolean? = null
     var spyFormat : String? = null
 
-    fun read(){
+    override fun read(){
         main.saveDefaultConfig()
         main.reloadConfig()
 
