@@ -32,10 +32,6 @@ class Main : ADarkMod(), Listener {
     var luckPermsEnabled: Boolean = false
     var luckPermApi : LuckPerms? = null
 
-    init {
-        val configParser : ConfigParser = configParser as ConfigParser
-    }
-
     override fun onEnable(){
         super.onEnable()
         configParser.read()
