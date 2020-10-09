@@ -12,15 +12,12 @@ import com.github.DarkVanityOfLight.ChattPlugin.parser.ConfigParser
 import com.github.DarkVanityOfLight.ChattPlugin.parser.DataParser
 import net.luckperms.api.LuckPerms
 import org.bukkit.Bukkit
-import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandMap
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 import java.lang.reflect.Field
-import com.github.DarkVanityOfLight.ChattPlugin.runnables.CommandRegistry
 import com.github.darkvanityoflight.darkmodcore.ADarkMod
 
 
@@ -52,7 +49,7 @@ class Main : ADarkMod(), Listener {
             if (luckPermProvider != null) {
                 luckPermApi = luckPermProvider.provider
             }else{
-                Bukkit.getLogger().warning("Could not get the Lucky perm api even though lucky perms is enabled")
+                warning("Could not get the Lucky perm api even though lucky perms is enabled")
             }
         }
 
@@ -96,7 +93,7 @@ class Main : ADarkMod(), Listener {
                     )
                 }
             }else {
-                Bukkit.getLogger().warning("No properties ofr $channel, please specify some")
+                warning("No properties ofr $channel, please specify some")
             }
         }
 
