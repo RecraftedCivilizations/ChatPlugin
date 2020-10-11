@@ -14,7 +14,7 @@ class PlayerChat : Chat{
     var listStyle : String = ""
     override var main : Main
     override var channelName: String
-    override var format: String
+    override var format: StrtoLowerCaseing
 
     constructor(name : String, list_style : String, ignoreWorld : Boolean, format : String, muteable : Boolean, radius : Int, main: Main, channelName : String){
         this.format = format
