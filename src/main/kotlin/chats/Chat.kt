@@ -5,7 +5,6 @@ import net.luckperms.api.model.user.User
 import net.luckperms.api.query.QueryOptions
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
-import sun.audio.AudioPlayer.player
 
 
 abstract class Chat : IChat {

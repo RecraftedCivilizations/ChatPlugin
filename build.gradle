@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.DarkVanityOfLight.ChatPlugin'
-version '1.5.11-PRERELEASE'
+version '1.5.12'
 
 repositories {
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
@@ -24,6 +24,13 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    compileOnly "com.github.MilkBowl:VaultAPI:1.7"
 }
 
 dependencies {

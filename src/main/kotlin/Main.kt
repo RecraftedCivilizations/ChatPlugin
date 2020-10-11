@@ -19,7 +19,8 @@ import org.bukkit.event.player.PlayerJoinEvent
 import java.io.File
 import java.lang.reflect.Field
 import com.github.darkvanityoflight.darkmodcore.ADarkMod
-import com.github.darkvanityoflight.darkmodcore.configparser.ADarkModConfigParser
+import com.onarandombox.MultiverseCore.MultiverseCore
+import org.bukkit.plugin.Plugin
 
 
 class Main : ADarkMod(), Listener {
@@ -31,6 +32,7 @@ class Main : ADarkMod(), Listener {
     var factionsEnabled: Boolean = false
     var luckPermsEnabled: Boolean = false
     var luckPermApi : LuckPerms? = null
+    var multiversePlugin : MultiverseCore? = null
 
     override fun onEnable(){
         super.onEnable()
@@ -38,6 +40,12 @@ class Main : ADarkMod(), Listener {
 
         if (!chatLog.exists()){
             chatLog.createNewFile()
+        }
+
+        val plugin : Plugin? = Bukkit.getServer().pluginManager.getPlugin("MultiverseCore")
+
+        if (plugin is MultiverseCore) {
+            multiversePlugin = plugin as MultiverseCore
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("Factions")) factionsEnabled = true
@@ -101,8 +109,8 @@ class Main : ADarkMod(), Listener {
         Bukkit.getPluginManager().registerEvents(this, this)
         Bukkit.getPluginManager().registerEvents(ChatListener(this), this)
         this.getCommand("spy")?.setExecutor(spyChat)
-        this.getCommand("mute")?.setExecutor(MuteChannel(this))
-        this.getCommand("unmute")?.setExecutor(UnmuteChannel(this))
+        this.getCommand("mutech")?.setExecutor(MuteChannel(this))
+        this.getCommand("unmutech")?.setExecutor(UnmuteChannel(this))
 
         val chatList = Array<PlayerChat?>(chats.keys.size) { null }
         chats.keys.forEachIndexed { pos, key -> chatList[pos] = chats[key]!! }

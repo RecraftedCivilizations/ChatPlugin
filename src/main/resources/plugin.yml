@@ -17,11 +17,11 @@ commands:
     permission: chatplugin.spy
     permission-message: Fuck of you are not allowed to spy on people
 
-  mute:
+  mutech:
     description: Mute one or more given channels
     usage: /mute <channel> <names>
 
-  unmute:
+  unmutech:
     description: Unmute a given channel
     usage: /unmute <channel> <names>
 

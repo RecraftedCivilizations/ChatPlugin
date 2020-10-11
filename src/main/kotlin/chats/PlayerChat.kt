@@ -52,7 +52,6 @@ class PlayerChat : Chat{
             main.spyChat.sendMessage(message, sender)
         }
 
-        main.debug_log("Recipients are: $players")
     }
 
     private fun getPlayersInRange(sender: Player) : List<Player>{
