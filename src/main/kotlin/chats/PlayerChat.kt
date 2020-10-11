@@ -78,7 +78,7 @@ class PlayerChat : Chat{
         val mutePlayers = emptySet<Player>().toMutableSet()
 
         for (player in Bukkit.getOnlinePlayers()){
-            if (channelName in main.dataParser.getStringList("Mutet-Channels.${player.name}")){
+            if (channelName.toUpperCase() in main.dataParser.getStringList("Mutet-Channels.${player.name}")){
                 mutePlayers.add(player)
             }
         }
