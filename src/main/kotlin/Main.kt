@@ -33,6 +33,7 @@ class Main : ADarkMod(), Listener {
     var luckPermsEnabled: Boolean = false
     var luckPermApi : LuckPerms? = null
     var multiversePlugin : MultiverseCore? = null
+    var multiverseEnabled : Boolean = false
 
     override fun onEnable(){
         super.onEnable()
@@ -42,10 +43,14 @@ class Main : ADarkMod(), Listener {
             chatLog.createNewFile()
         }
 
-        val plugin : Plugin? = Bukkit.getServer().pluginManager.getPlugin("MultiverseCore")
-
-        if (plugin is MultiverseCore) {
-            multiversePlugin = plugin as MultiverseCore
+        if(Bukkit.getPluginManager().isPluginEnabled("MultiverseCore")){
+            val plugin : Plugin = Bukkit.getServer().pluginManager.getPlugin("MultiverseCore")!!
+            if (plugin is MultiverseCore) {
+                multiversePlugin = plugin
+                multiverseEnabled = true
+            }else {
+                severe("Multiverse seems to be enabled on your server, but we couldn't find it")
+            }
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("Factions")) factionsEnabled = true
