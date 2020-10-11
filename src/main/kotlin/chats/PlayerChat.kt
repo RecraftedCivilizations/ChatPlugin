@@ -61,8 +61,10 @@ class PlayerChat : Chat{
             players +=  Bukkit.getOnlinePlayers().toList()
         }else {
             for (player in Bukkit.getOnlinePlayers()){
+                if (player.world == sender.world){
                 if (player.location.distance(sender.location) <= this.radius){
                         players.add(player)
+                    }
                 }
             }
         }
