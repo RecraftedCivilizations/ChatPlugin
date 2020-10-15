@@ -1,6 +1,7 @@
-package com.github.DarkVanityOfLight.ChattPlugin.commands
+package com.github.darkvanityoflight.chatplugin.commands
 
-import com.github.DarkVanityOfLight.ChattPlugin.chats.PlayerChat
+
+import com.github.darkvanityoflight.chatplugin.chats.PlayerChat
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender

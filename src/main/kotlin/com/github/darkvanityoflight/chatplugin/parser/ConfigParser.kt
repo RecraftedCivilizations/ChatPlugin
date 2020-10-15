@@ -1,8 +1,6 @@
-package com.github.DarkVanityOfLight.ChattPlugin.parser
+package com.github.darkvanityoflight.chatplugin.parser
 
-import com.github.DarkVanityOfLight.ChattPlugin.Main
 import com.github.darkvanityoflight.darkmodcore.configparser.ADarkModConfigParser
-import com.massivecraft.factions.cmd.Aliases.config
 import org.bukkit.Bukkit
 import org.bukkit.configuration.file.FileConfiguration
 

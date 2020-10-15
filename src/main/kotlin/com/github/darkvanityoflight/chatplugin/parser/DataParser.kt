@@ -1,7 +1,7 @@
-package com.github.DarkVanityOfLight.ChattPlugin.parser
+package com.github.darkvanityoflight.chatplugin.parser
 
-import com.github.DarkVanityOfLight.ChattPlugin.Main
-import org.bukkit.Bukkit
+
+import com.github.darkvanityoflight.chatplugin.Main
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File

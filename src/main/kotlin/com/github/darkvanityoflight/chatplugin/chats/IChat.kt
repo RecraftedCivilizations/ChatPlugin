@@ -1,7 +1,6 @@
-package com.github.DarkVanityOfLight.ChattPlugin.chats
+package com.github.darkvanityoflight.chatplugin.chats
 
-import com.github.DarkVanityOfLight.ChattPlugin.Main
-import org.bukkit.ChatColor
+import com.github.darkvanityoflight.chatplugin.Main
 import org.bukkit.entity.Player
 
 interface IChat {

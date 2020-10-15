@@ -1,12 +1,10 @@
-package com.github.DarkVanityOfLight.ChattPlugin.listeners
+package com.github.darkvanityoflight.chatplugin.listeners
 
-import com.github.DarkVanityOfLight.ChattPlugin.Main
-import com.github.DarkVanityOfLight.ChattPlugin.chats.PlayerChat
-import com.github.DarkVanityOfLight.ChattPlugin.parser.DataParser
+
+import com.github.darkvanityoflight.chatplugin.Main
+import com.github.darkvanityoflight.chatplugin.chats.PlayerChat
 import com.massivecraft.factions.FPlayers
-import com.massivecraft.factions.struct.ChatMode
 import org.bukkit.Bukkit
-import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener

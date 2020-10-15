@@ -1,4 +1,4 @@
-package com.github.DarkVanityOfLight.ChattPlugin.chats
+package com.github.darkvanityoflight.chatplugin.chats
 
 import com.massivecraft.factions.FPlayers
 import net.luckperms.api.model.user.User

@@ -2,7 +2,7 @@ softdepend: [Factions, LuckPerms]
 
 permissions:
   chatplugin.spy:
-    description: let you see all chats without range restrictions using /spy
+    description: let you see all com.github.darkvanity.chatplugin.chats without range restrictions using /spy
     default: false
 
 commands:

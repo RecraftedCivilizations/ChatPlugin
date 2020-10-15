@@ -1,12 +1,13 @@
-package com.github.DarkVanityOfLight.ChattPlugin.chats
+package com.github.darkvanityoflight.chatplugin.chats
 
-import com.github.DarkVanityOfLight.ChattPlugin.Main
+import com.github.darkvanityoflight.chatplugin.Main
+import com.github.darkvanityoflight.chatplugin.chats.Chat
 import com.massivecraft.factions.FPlayers
 import com.massivecraft.factions.struct.ChatMode
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
-class PlayerChat : Chat{
+class PlayerChat : Chat {
     private var radius : Int = 0
     var ignoreWorld = true
     var name : String = ""

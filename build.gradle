@@ -6,7 +6,7 @@ plugins {
     id "ru.endlesscode.bukkitgradle" version "0.8.2"
 }
 
-group 'com.github.DarkVanityOfLight'
+group 'com.github.darlvanityoflight'
 version '1.5.13'
 
 repositories {

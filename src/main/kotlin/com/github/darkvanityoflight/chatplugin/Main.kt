@@ -1,15 +1,15 @@
-package com.github.DarkVanityOfLight.ChattPlugin
+package com.github.darkvanityoflight.chatplugin
 
-import com.github.DarkVanityOfLight.ChattPlugin.chats.PlayerChat
-import com.github.DarkVanityOfLight.ChattPlugin.chats.SpyChat
-import com.github.DarkVanityOfLight.ChattPlugin.commands.ListChannels
-import com.github.DarkVanityOfLight.ChattPlugin.commands.MuteChannel
-import com.github.DarkVanityOfLight.ChattPlugin.commands.SwitchChannel
-import com.github.DarkVanityOfLight.ChattPlugin.commands.UnmuteChannel
-import com.github.DarkVanityOfLight.ChattPlugin.listeners.ChatListener
-import com.github.DarkVanityOfLight.ChattPlugin.listeners.ServerLoadListener
-import com.github.DarkVanityOfLight.ChattPlugin.parser.ConfigParser
-import com.github.DarkVanityOfLight.ChattPlugin.parser.DataParser
+import com.github.darkvanityoflight.chatplugin.chats.PlayerChat
+import com.github.darkvanityoflight.chatplugin.chats.SpyChat
+import com.github.darkvanityoflight.chatplugin.commands.ListChannels
+import com.github.darkvanityoflight.chatplugin.commands.MuteChannel
+import com.github.darkvanityoflight.chatplugin.commands.SwitchChannel
+import com.github.darkvanityoflight.chatplugin.commands.UnmuteChannel
+import com.github.darkvanityoflight.chatplugin.listeners.ChatListener
+import com.github.darkvanityoflight.chatplugin.listeners.ServerLoadListener
+import com.github.darkvanityoflight.chatplugin.parser.ConfigParser
+import com.github.darkvanityoflight.chatplugin.parser.DataParser
 import net.luckperms.api.LuckPerms
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandMap
@@ -98,11 +98,11 @@ class Main : ADarkMod(), Listener {
                     )
                 }
                 if (!configParser.overwrite!!){
-                    // Register our commands without plugin.yml
+                    // Register our com.github.darkvanity.chatplugin.commands without plugin.yml
                     commandMap.register(
                         channel, SwitchChannel(
                             channel, properties["list_style"] as String, "/$channel",
-                            "chatPlugin.commands.switchChannel", ArrayList(), this
+                            "chatPlugin.com.github.darkvanity.chatplugin.commands.switchChannel", ArrayList(), this
                         )
                     )
                 }
@@ -122,7 +122,7 @@ class Main : ADarkMod(), Listener {
         val nonNullChats = Array<PlayerChat>(chats.keys.size) { pos -> chatList[pos]!! }
         this.getCommand("list_channels")?.setExecutor(ListChannels(nonNullChats))
 
-        // Start a task to register our commands if overwrite is true
+        // Start a task to register our com.github.darkvanity.chatplugin.commands if overwrite is true
         if (configParser.overwrite!!) {
             Bukkit.getPluginManager().registerEvents(ServerLoadListener(this), this)
         }

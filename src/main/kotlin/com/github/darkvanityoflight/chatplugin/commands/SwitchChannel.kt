@@ -1,13 +1,14 @@
-package com.github.DarkVanityOfLight.ChattPlugin.commands
+package com.github.darkvanityoflight.chatplugin.commands
 
-import com.github.DarkVanityOfLight.ChattPlugin.Main
+import com.github.darkvanityoflight.chatplugin.Main
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 import org.bukkit.command.defaults.BukkitCommand
 import org.bukkit.entity.Player
 
 class SwitchChannel(private val channelName: String, description: String, usage: String, permission: String,
-                    aliases: ArrayList<String>, private val main: Main) : BukkitCommand(channelName) {
+                    aliases: ArrayList<String>, private val main: Main
+) : BukkitCommand(channelName) {
 
     override fun execute(sender: CommandSender, commandLabel: String, args: Array<out String>): Boolean {
         if (sender is Player){
