@@ -1,5 +1,6 @@
 package com.github.darkvanityoflight.chatplugin
 
+import com.github.darkvanityoflight.chatplugin.api.DataAPI
 import com.github.darkvanityoflight.chatplugin.api.ParserAPI
 import com.github.darkvanityoflight.chatplugin.chats.PlayerChat
 import com.github.darkvanityoflight.chatplugin.chats.SpyChat
@@ -135,6 +136,9 @@ class Main : ADarkMod(), Listener {
         ParserAPI.configParser = configParser
         ParserAPI.dataParser = dataParser
         ParserAPI.initialized = true
+
+        DataAPI.channels = chats
+        DataAPI.initialized = true
     }
 
     @EventHandler

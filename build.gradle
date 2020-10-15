@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'com.github.darlvanityoflight'
-version '1.5.14'
+version '1.5.15'
 
 repositories {
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly "com.github.MilkBowl:VaultAPI:1.7"
+    /*compileOnly "com.github.MilkBowl:VaultAPI:1.7"*/
 }
 
 dependencies {
