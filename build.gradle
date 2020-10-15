@@ -47,7 +47,7 @@ bukkit {
         name = "ChatPlugin"
         description = 'Define different channels to talk in, different channels might have a different range.' +
                 'Define the message format using values from LuckPerms and Factions'
-        main = "com.github.DarkVanityOfLight.ChattPlugin.Main"
+        main = "com.github.darkvanityoflight.chatplugin.Main"
         version = this.version
         authors = ["DarkVanityOfLight"]
     }
