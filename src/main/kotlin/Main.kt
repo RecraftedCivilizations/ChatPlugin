@@ -24,7 +24,7 @@ import org.bukkit.plugin.Plugin
 
 
 class Main : ADarkMod(), Listener {
-    var configParser : ConfigParser = ConfigParser(this)
+    var configParser : ConfigParser = ConfigParser(config)
     val chats : MutableMap<String, PlayerChat> = emptyMap<String, PlayerChat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)
     private val chatLog : File = File(this.dataFolder.absolutePath + "/log.lst")

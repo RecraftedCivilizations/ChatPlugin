@@ -2,24 +2,22 @@ package com.github.DarkVanityOfLight.ChattPlugin.parser
 
 import com.github.DarkVanityOfLight.ChattPlugin.Main
 import com.github.darkvanityoflight.darkmodcore.configparser.ADarkModConfigParser
+import com.massivecraft.factions.cmd.Aliases.config
 import org.bukkit.Bukkit
 import org.bukkit.configuration.file.FileConfiguration
 
-class ConfigParser(private val main: Main) : ADarkModConfigParser() {
+class ConfigParser(config: FileConfiguration) : ADarkModConfigParser(config) {
     lateinit var chats: List<String>
     lateinit var chatProperties : MutableMap<String, Map<String, Any>>
     lateinit var defaultChannel : String
-    lateinit var config : FileConfiguration
     var overwrite : Boolean? = null
     var spyFormat : String? = null
 
     override fun read(){
-        main.saveDefaultConfig()
-        main.reloadConfig()
+
 
         chatProperties = emptyMap<String, Map<String, Any>>().toMutableMap()
 
-        config = main.config
 
         overwrite = config.getBoolean("overwrite")
 
