@@ -32,7 +32,6 @@ dependencies {
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot-api:1.16.1-R0.1-SNAPSHOT'
     compileOnly 'net.luckperms:api:5.0'
     compileOnly spigotApi()
     compileOnly 'com.github.darkvanityoflight:DarkModCore:1.+'
