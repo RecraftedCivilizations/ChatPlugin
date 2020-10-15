@@ -16,7 +16,18 @@ class SpyChat(override var main: Main) : CommandExecutor, Chat() {
         val spyPlayer = main.dataParser.spyPlayer
         val sendToPlayers = emptySet<Player>().toMutableSet()
 
-        val asmMessage = assembleMessage(message, sender, )
+        val asmMessage = assembleMessage(message, sender)
+
+        Bukkit.getOnlinePlayers().forEach{ player -> if (player.name in spyPlayer) sendToPlayers.add(player)}
+
+        sendToPlayers.forEach { spy -> spy.sendMessage(asmMessage) }
+    }
+
+    override fun sendMessage(message: String, sender: Player, form: String) {
+        val spyPlayer = main.dataParser.spyPlayer
+        val sendToPlayers = emptySet<Player>().toMutableSet()
+
+        val asmMessage = assembleMessage(message, sender, form)
 
         Bukkit.getOnlinePlayers().forEach{ player -> if (player.name in spyPlayer) sendToPlayers.add(player)}
 

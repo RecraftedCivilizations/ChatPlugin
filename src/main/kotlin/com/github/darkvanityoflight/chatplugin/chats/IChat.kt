@@ -9,5 +9,7 @@ interface IChat {
     var channelName: String
 
     fun sendMessage(message : String, sender : Player)
+    fun sendMessage(message: String, sender: Player, form : String)
     fun assembleMessage(message: String, sender : Player) : String
+    fun assembleMessage(message: String, sender: Player, form: String) : String
 }

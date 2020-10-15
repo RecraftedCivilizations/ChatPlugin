@@ -1,7 +1,6 @@
 package com.github.darkvanityoflight.chatplugin.chats
 
 import com.github.darkvanityoflight.chatplugin.Main
-import com.github.darkvanityoflight.chatplugin.chats.Chat
 import com.massivecraft.factions.FPlayers
 import com.massivecraft.factions.struct.ChatMode
 import org.bukkit.Bukkit
@@ -53,6 +52,23 @@ class PlayerChat : Chat {
             main.spyChat.sendMessage(message, sender)
         }
 
+    }
+
+    override fun sendMessage(message: String, sender: Player, form: String) {
+        val players : List<Player> = getPlayersInRange(sender)
+        val assembledMessage : String = assembleMessage(message, sender, form)
+
+        for (player in players){
+            player.sendMessage(assembledMessage)
+        }
+
+        if (main.factionsEnabled){
+            if (FPlayers.getInstance().getByPlayer(sender).chatMode != ChatMode.PUBLIC || !ignoreWorld) {
+                main.spyChat.sendMessage(message, sender)
+            }
+        } else if (!ignoreWorld){
+            main.spyChat.sendMessage(message, sender)
+        }
     }
 
     private fun getPlayersInRange(sender: Player) : List<Player>{
