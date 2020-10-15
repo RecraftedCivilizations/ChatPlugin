@@ -1,8 +1,3 @@
-name: ChatPlugin
-main: com.github.DarkVanityOfLight.ChattPlugin.Main
-version: 1.5.13
-author: DarkVanityOfLight
-api-version: '1.16'
 softdepend: [Factions, LuckPerms]
 
 permissions:

@@ -1,25 +1,22 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.4.0-rc'
     id 'com.github.johnrengelman.shadow' version '2.0.4'
+    id 'maven-publish'
+    id "org.hibernate.build.maven-repo-auth" version "3.0.4"
+    id "ru.endlesscode.bukkitgradle" version "0.8.2"
 }
 
-group 'com.github.DarkVanityOfLight.ChatPlugin'
+group 'com.github.DarkVanityOfLight'
 version '1.5.13'
 
 repositories {
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     mavenCentral()
-}
-
-repositories {
     maven {
-        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
-
-        content {
-            includeGroup 'org.bukkit'
-            includeGroup 'org.spigotmc'
-        }
+        name = "DarkMods"
+        url 'https://repo.repsy.io/mvn/darkvanityoflight/darkmods'
     }
+    spigot()
 }
 
 dependencies {
@@ -29,6 +26,7 @@ dependencies {
 repositories {
     maven { url 'https://jitpack.io' }
 }
+
 dependencies {
     compileOnly "com.github.MilkBowl:VaultAPI:1.7"
 }
@@ -36,7 +34,43 @@ dependencies {
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.1-R0.1-SNAPSHOT'
     compileOnly 'net.luckperms:api:5.0'
+    compileOnly spigotApi()
+    compileOnly 'com.github.darkvanityoflight:DarkModCore:1.+'
     compileOnly fileTree(include: ['*.jar'], dir: 'lib')
+}
+
+
+
+bukkit {
+    version = "1.16.3"
+
+    meta {
+        name = "ChatPlugin"
+        description = 'Define different channels to talk in, different channels might have a different range.' +
+                'Define the message format using values from LuckPerms and Factions'
+        main = "com.github.DarkVanityOfLight.ChattPlugin.Main"
+        version = this.version
+        authors = ["DarkVanityOfLight"]
+    }
+
+}
+
+publishing {
+    publications {
+        DarkMod(MavenPublication) {
+            groupId = 'com.github.darkvanityoflight'
+            artifactId = rootProject.name
+            version = this.version
+
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            name = 'DarkMods'
+            url 'https://repo.repsy.io/mvn/darkvanityoflight/darkmods'
+        }
+    }
 }
 
 compileKotlin {
