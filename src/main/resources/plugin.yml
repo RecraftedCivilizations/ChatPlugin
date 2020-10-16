@@ -1,4 +1,4 @@
-softdepend: [Factions, LuckPerms]
+softdepend: [Factions, LuckPerms, Vault]
 api-version: 1.16.3
 permissions:
   chatplugin.spy:
