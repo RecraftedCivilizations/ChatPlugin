@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'com.github.darlvanityoflight'
-version '1.5.15'
+version '1.6.0'
 
 repositories {
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
@@ -41,7 +41,6 @@ dependencies {
 
 
 bukkit {
-    version = "1.16.3"
 
     meta {
         name = "ChatPlugin"
