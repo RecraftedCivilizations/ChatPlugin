@@ -22,7 +22,9 @@ import java.io.File
 import java.lang.reflect.Field
 import com.github.darkvanityoflight.darkmodcore.ADarkMod
 import com.onarandombox.MultiverseCore.MultiverseCore
+import net.milkbowl.vault.economy.Economy
 import org.bukkit.plugin.Plugin
+import org.bukkit.plugin.RegisteredServiceProvider
 
 
 class Main : ADarkMod(), Listener {
@@ -36,6 +38,8 @@ class Main : ADarkMod(), Listener {
     var luckPermApi : LuckPerms? = null
     var multiversePlugin : MultiverseCore? = null
     var multiverseEnabled : Boolean = false
+    var vaultEnabled : Boolean = false
+    var economy : Economy? = null
 
     override fun onEnable(){
         super.onEnable()
@@ -45,6 +49,8 @@ class Main : ADarkMod(), Listener {
             chatLog.createNewFile()
         }
 
+
+        // Check for apis/plugins to use
         if(Bukkit.getPluginManager().isPluginEnabled("MultiverseCore")){
             val plugin : Plugin = Bukkit.getServer().pluginManager.getPlugin("MultiverseCore")!!
             if (plugin is MultiverseCore) {
@@ -56,6 +62,7 @@ class Main : ADarkMod(), Listener {
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("Factions")) factionsEnabled = true
+
         if (Bukkit.getPluginManager().isPluginEnabled("LuckPerms")){
             luckPermsEnabled = true
 
@@ -67,6 +74,16 @@ class Main : ADarkMod(), Listener {
             }else{
                 warning("Could not get the Lucky perm api even though lucky perms is enabled")
             }
+        }
+
+        if (Bukkit.getPluginManager().isPluginEnabled("Vault")){
+            vaultEnabled = true
+            val rsp : RegisteredServiceProvider<Economy>? =  server.servicesManager.getRegistration(Economy::class.java)
+            if (rsp == null){
+                vaultEnabled = false
+                return
+            }
+            economy = rsp.provider
         }
 
         // Check if data file exists if not create
@@ -90,13 +107,13 @@ class Main : ADarkMod(), Listener {
                     chats[channel.toUpperCase()] = PlayerChat(
                         properties["name"] as String, properties["list_style"] as String,
                         properties["ignore_world"] as Boolean, properties["format"] as String,
-                        properties["muteable"] as Boolean, properties["radius"] as Int, this, channel
+                        properties["muteable"] as Boolean, properties["radius"] as Int, this, channel, properties["msgCost"] as Int
                     )
                 } else{
                     chats[channel.toUpperCase()] = PlayerChat(
                         properties["name"] as String, properties["list_style"] as String,
                         properties["format"] as String, properties["muteable"] as Boolean,
-                        properties["radius"] as Int, this, channel
+                        properties["radius"] as Int, this, channel, properties["msgCost"] as Int
                     )
                 }
                 if (!configParser.overwrite!!){
