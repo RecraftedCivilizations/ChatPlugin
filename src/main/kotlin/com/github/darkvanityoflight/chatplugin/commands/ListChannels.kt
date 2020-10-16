@@ -7,7 +7,7 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 
 class ListChannels(val channels: Array<PlayerChat>) : CommandExecutor {
-    private lateinit var formatedChannels : Array<String>
+    private var formatedChannels : Array<String>
 
     init {
         formatedChannels = Array(channels.size) { pos -> channels[pos].listStyle }
