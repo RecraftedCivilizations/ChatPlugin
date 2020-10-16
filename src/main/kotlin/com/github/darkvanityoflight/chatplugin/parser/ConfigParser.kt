@@ -34,6 +34,7 @@ class ConfigParser(config: FileConfiguration) : ADarkModConfigParser(config) {
 
         for (chat in chats){
             val properties = emptyMap<String, Any>().toMutableMap()
+            //Loop throught all keys in the config section and add it to the chat map
             for (key in config.getConfigurationSection("Channels.$chat")!!.getKeys(false)){
                 properties[key] = config.getConfigurationSection("Channels.$chat")!![key] as Any
             }
