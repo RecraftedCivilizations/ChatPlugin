@@ -107,13 +107,13 @@ class Main : ADarkMod(), Listener {
                     chats[channel.toUpperCase()] = PlayerChat(
                         properties["name"] as String, properties["list_style"] as String,
                         properties["ignore_world"] as Boolean, properties["format"] as String,
-                        properties["muteable"] as Boolean, properties["radius"] as Int, this, channel, properties["msgCost"] as Int
+                        properties["muteable"] as Boolean, properties["radius"] as Int, this, channel, properties["msgCost"] as Int?
                     )
                 } else{
                     chats[channel.toUpperCase()] = PlayerChat(
                         properties["name"] as String, properties["list_style"] as String,
                         properties["format"] as String, properties["muteable"] as Boolean,
-                        properties["radius"] as Int, this, channel, properties["msgCost"] as Int
+                        properties["radius"] as Int, this, channel, properties["msgCost"] as Int?
                     )
                 }
                 if (!configParser.overwrite!!){
@@ -121,7 +121,7 @@ class Main : ADarkMod(), Listener {
                     commandMap.register(
                         channel, SwitchChannel(
                             channel, properties["list_style"] as String, "/$channel",
-                            "chatPlugin.com.github.darkvanity.chatplugin.commands.switchChannel", ArrayList(), this
+                            "chatplugin.switchChannel", ArrayList(), this
                         )
                     )
                 }
