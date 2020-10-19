@@ -1,5 +1,4 @@
 softdepend: [Factions, LuckPerms, Vault]
-api-version: 1.16.3
 permissions:
   chatplugin.spy:
     description: let you see all com.github.darkvanity.chatplugin.chats without range restrictions using /spy
