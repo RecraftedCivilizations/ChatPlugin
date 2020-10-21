@@ -1,4 +1,5 @@
 softdepend: [Factions, LuckPerms, Vault]
+depend: [RecraftedCore]
 permissions:
   chatplugin.spy:
     description: let you see all com.github.darkvanity.chatplugin.chats without range restrictions using /spy
