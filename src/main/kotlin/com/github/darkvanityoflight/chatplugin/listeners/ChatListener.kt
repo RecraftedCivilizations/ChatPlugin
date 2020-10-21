@@ -40,7 +40,7 @@ class ChatListener(private val main: Main) : Listener {
                 return
             }
         }else{
-            Bukkit.getLogger().info("Factions is not enabled")
+           chat.sendMessage(event.message, event.player)
         }
     }
 }
