@@ -57,7 +57,7 @@ abstract class Chat : IChat {
         form = form.replace("{message}", message)
         form = form.replace("{nickname}", sender.displayName)
         form = form.replace("{channel_name}", channelName)
-        form = form.replace("%", "\\%")
+        form = form.replace("%", "%")
 
         form = ChatColor.translateAlternateColorCodes('&', form)
         return form
@@ -111,6 +111,7 @@ abstract class Chat : IChat {
         form = form.replace("{message}", message)
         form = form.replace("{nickname}", sender.displayName)
         form = form.replace("{channel_name}", channelName)
+        form = form.replace("%", "%")
 
         form = ChatColor.translateAlternateColorCodes('&', form)
         return form

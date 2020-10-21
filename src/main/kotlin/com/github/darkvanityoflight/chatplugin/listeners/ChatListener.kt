@@ -41,6 +41,7 @@ class ChatListener(private val main: Main) : Listener {
             }
         }else{
            chat.sendMessage(event.message, event.player)
+            event.isCancelled = true
         }
     }
 }
