@@ -31,7 +31,6 @@ class Main : ARecraftedPlugin(), Listener {
     var configParser : ConfigParser = ConfigParser(config)
     val chats : MutableMap<String, PlayerChat> = emptyMap<String, PlayerChat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)
-    private val chatLog : File = File(this.dataFolder.absolutePath + "/log.lst")
     lateinit var spyChat: SpyChat
     var factionsEnabled: Boolean = false
     var luckPermsEnabled: Boolean = false
@@ -43,11 +42,8 @@ class Main : ARecraftedPlugin(), Listener {
 
     override fun onEnable(){
         super.onEnable()
+        reloadConfig()
         configParser.read()
-
-        if (!chatLog.exists()){
-            chatLog.createNewFile()
-        }
 
 
         // Check for apis/plugins to use
