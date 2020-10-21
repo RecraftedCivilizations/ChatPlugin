@@ -42,7 +42,7 @@ class Main : ARecraftedPlugin(), Listener {
 
     override fun onEnable(){
         super.onEnable()
-        reloadConfig()
+        saveDefaultConfig()
         configParser.read()
 
 
