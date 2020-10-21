@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'com.github.darkvanityoflight'
-version '1.6.1'
+version '1.6.2'
 
 repositories {
     maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
