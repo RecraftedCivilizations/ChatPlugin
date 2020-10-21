@@ -1,10 +1,11 @@
 package com.github.darkvanityoflight.chatplugin.parser
 
-import com.github.darkvanityoflight.darkmodcore.configparser.ADarkModConfigParser
+
 import org.bukkit.Bukkit
+import com.github.darkvanityoflight.recraftedcore.configparser.ARecraftedConfigParser
 import org.bukkit.configuration.file.FileConfiguration
 
-class ConfigParser(config: FileConfiguration) : ADarkModConfigParser(config) {
+class ConfigParser(config: FileConfiguration) : ARecraftedConfigParser(config) {
     lateinit var chats: List<String>
     lateinit var chatProperties : MutableMap<String, Map<String, Any>>
     lateinit var defaultChannel : String

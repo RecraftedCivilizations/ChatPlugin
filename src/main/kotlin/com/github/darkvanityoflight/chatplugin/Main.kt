@@ -20,14 +20,14 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import java.io.File
 import java.lang.reflect.Field
-import com.github.darkvanityoflight.darkmodcore.ADarkMod
+import com.github.darkvanityoflight.recraftedcore.ARecraftedPlugin
 import com.onarandombox.MultiverseCore.MultiverseCore
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.RegisteredServiceProvider
 
 
-class Main : ADarkMod(), Listener {
+class Main : ARecraftedPlugin(), Listener {
     var configParser : ConfigParser = ConfigParser(config)
     val chats : MutableMap<String, PlayerChat> = emptyMap<String, PlayerChat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)

@@ -6,7 +6,7 @@ plugins {
     id "ru.endlesscode.bukkitgradle" version "0.8.2"
 }
 
-group 'com.github.darlvanityoflight'
+group 'com.github.darkvanityoflight'
 version '1.6.1'
 
 repositories {
@@ -34,7 +34,7 @@ dependencies {
 dependencies {
     compileOnly 'net.luckperms:api:5.0'
     compileOnly spigotApi()
-    compileOnly 'com.github.darkvanityoflight:DarkModCore:1.+'
+    compileOnly 'com.github.darkvanityoflight:RecraftedCore:2.+'
     compileOnly fileTree(include: ['*.jar'], dir: 'lib')
 }
 
