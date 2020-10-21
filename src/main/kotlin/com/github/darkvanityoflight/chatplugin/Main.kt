@@ -9,15 +9,14 @@ import com.github.darkvanityoflight.chatplugin.commands.MuteChannel
 import com.github.darkvanityoflight.chatplugin.commands.SwitchChannel
 import com.github.darkvanityoflight.chatplugin.commands.UnmuteChannel
 import com.github.darkvanityoflight.chatplugin.listeners.ChatListener
+import com.github.darkvanityoflight.chatplugin.listeners.PlayerJoinListener
 import com.github.darkvanityoflight.chatplugin.listeners.ServerLoadListener
 import com.github.darkvanityoflight.chatplugin.parser.ConfigParser
 import com.github.darkvanityoflight.chatplugin.parser.DataParser
 import net.luckperms.api.LuckPerms
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandMap
-import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.player.PlayerJoinEvent
 import java.io.File
 import java.lang.reflect.Field
 import com.github.darkvanityoflight.recraftedcore.ARecraftedPlugin
@@ -27,7 +26,7 @@ import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.RegisteredServiceProvider
 
 
-class Main : ARecraftedPlugin(), Listener {
+class Main : ARecraftedPlugin() {
     var configParser : ConfigParser = ConfigParser(config)
     val chats : MutableMap<String, PlayerChat> = emptyMap<String, PlayerChat>().toMutableMap()
     val dataParser : DataParser = DataParser(this)
@@ -126,7 +125,7 @@ class Main : ARecraftedPlugin(), Listener {
             }
         }
 
-        Bukkit.getPluginManager().registerEvents(this, this)
+        Bukkit.getPluginManager().registerEvents(PlayerJoinListener(dataParser, configParser), this)
         Bukkit.getPluginManager().registerEvents(ChatListener(this), this)
         this.getCommand("spy")?.setExecutor(spyChat)
         this.getCommand("mutech")?.setExecutor(MuteChannel(this))
@@ -154,11 +153,5 @@ class Main : ARecraftedPlugin(), Listener {
         DataAPI.initialized = true
     }
 
-    @EventHandler
-    fun onJoin(event: PlayerJoinEvent){
-        if (event.player.name !in dataParser.playerChannelMap.keys){
-            dataParser.setData("Player-Channels.${event.player.name}", configParser.defaultChannel)
-        }
-    }
 
 }
