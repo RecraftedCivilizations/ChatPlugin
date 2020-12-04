@@ -1,4 +1,4 @@
-softdepend: [Factions, LuckPerms, Vault]
+softdepend: [Factions, LuckPerms, Vault, PlaceholderAPI]
 depend: [RecraftedCore]
 permissions:
   chatplugin.spy:
