@@ -39,7 +39,7 @@ jobs:
 
             - name: Copie the files
               run: |
-                if [ -d ./temp/Projects/${{ github.REPOSITORY}}/dev-builds/$VERSION ]
+                if [ -d "./temp/Projects/${{ github.REPOSITORY}}/dev-builds/$VERSION" ]
                 then
                     echo "Deleting old artifacts for the same version"
                     rm -rf ./temp/Projects/${{ github.REPOSITORY}}/dev-builds/$VERSION
@@ -93,7 +93,7 @@ jobs:
             - name: Copie the files
               run: |
                 
-                if [ -d ./temp/Projects/${{ github.REPOSITORY}}/tests/$VERSION ]
+                if [ -d "./temp/Projects/${{ github.REPOSITORY}}/tests/$VERSION" ]
                 then
                         echo "Deleting old tests for the same version"
                         rm -rf ./temp/Projects/${{ github.REPOSITORY}}/tests/$VERSION
@@ -152,7 +152,7 @@ jobs:
 
             - name: Copie the files
               run: |
-                if [ -d ./temp/Projects/${{ github.REPOSITORY}}/prod-builds/$VERSION ]
+                if [ -d "./temp/Projects/${{ github.REPOSITORY}}/prod-builds/$VERSION" ]
                 then
                     echo "Deleting old artifacts for the same version"
                     rm -rf ./temp/Projects/${{ github.REPOSITORY}}/prod-builds/$VERSION
@@ -203,7 +203,7 @@ jobs:
 
             - name: Copie the files
               run: |
-                  if [ -d ./temp/Projects/${{ github.REPOSITORY}}/docs/$VERSION ]
+                  if [ -d "./temp/Projects/${{ github.REPOSITORY}}/docs/$VERSION" ]
                   then
                       echo "Deleting old artifacts for the same version"
                       rm -rf ./temp/Projects/${{ github.REPOSITORY}}/docs/$VERSION
