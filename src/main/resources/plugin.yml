@@ -4,6 +4,9 @@ permissions:
   chatplugin.spy:
     description: let you see all com.github.darkvanity.chatplugin.chats without range restrictions using /spy
     default: false
+  chatplugin.color:
+    description: Translate color codes in the message
+    default: false
 
 commands:
   spy:
