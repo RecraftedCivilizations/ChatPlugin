@@ -47,6 +47,7 @@ jobs:
                 mkdir -p ./temp/Projects/${{ github.REPOSITORY }}/dev-builds/$VERSION
                 cp -r build/libs/. ./temp/Projects/${{ github.REPOSITORY }}/dev-builds/$VERSION
                 ls ./temp/Projects
+                echo "List ./temp/Projects/${{ github.REPOSITORY }}"
                 ls ./temp/Projects/${{ github.REPOSITORY }}
             - name: Push the changes
               working-directory: ./temp
