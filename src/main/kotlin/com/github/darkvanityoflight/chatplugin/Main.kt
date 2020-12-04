@@ -38,6 +38,8 @@ class Main : ARecraftedPlugin() {
     var multiverseEnabled : Boolean = false
     var vaultEnabled : Boolean = false
     var economy : Economy? = null
+    var papi : Plugin? = null
+    var papiEnabled : Boolean = false
 
     override fun onEnable(){
         super.onEnable()
@@ -79,6 +81,16 @@ class Main : ARecraftedPlugin() {
                 return
             }
             economy = rsp.provider
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")){
+            papi = Bukkit.getPluginManager().getPlugin("PlaceholderAPI")
+            if(papi == null){
+                warning("PlaceholderAPI is enabled, but we could not find the plugin")
+                papiEnabled = false
+            }else {
+                papiEnabled = true
+            }
         }
 
         // Check if data file exists if not create
