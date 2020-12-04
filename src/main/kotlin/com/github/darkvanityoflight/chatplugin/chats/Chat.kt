@@ -1,6 +1,7 @@
 package com.github.darkvanityoflight.chatplugin.chats
 
 import com.massivecraft.factions.FPlayers
+import me.clip.placeholderapi.PlaceholderAPI
 import net.luckperms.api.model.user.User
 import net.luckperms.api.query.QueryOptions
 import org.bukkit.ChatColor
@@ -53,8 +54,9 @@ abstract class Chat : IChat {
             }
         }
 
-        form = form.replace("{player_name}", sender.name)
-        form = form.replace("{message}", message)
+        if(main.papiEnabled){
+            form = PlaceholderAPI.setPlaceholders(sender, form)
+        }
         form = form.replace("{nickname}", sender.displayName)
         form = form.replace("{channel_name}", channelName)
         form = form.replace("{player_name}", sender.name)
