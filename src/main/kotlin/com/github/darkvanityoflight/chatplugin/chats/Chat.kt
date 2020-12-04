@@ -56,6 +56,9 @@ abstract class Chat : IChat {
 
         if(main.papiEnabled){
             form = PlaceholderAPI.setPlaceholders(sender, form)
+            if (sender.hasPermission("chatplugin.papi")){
+                message = PlaceholderAPI.setPlaceholders(sender, message)
+            }
         }
         form = form.replace("{nickname}", sender.displayName)
         form = form.replace("{channel_name}", channelName)

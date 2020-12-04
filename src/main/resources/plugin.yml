@@ -7,6 +7,9 @@ permissions:
   chatplugin.color:
     description: Translate color codes in the message
     default: false
+  chatplugin.papi:
+    description: Use Placeholders from placholder api in your message
+    default: false
 
 commands:
   spy:
