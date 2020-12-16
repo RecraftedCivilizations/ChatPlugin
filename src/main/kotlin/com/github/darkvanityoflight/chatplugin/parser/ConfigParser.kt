@@ -9,11 +9,14 @@ class ConfigParser(config: FileConfiguration) : ARecraftedConfigParser(config) {
     lateinit var chats: List<String>
     lateinit var chatProperties : MutableMap<String, Map<String, Any>>
     lateinit var defaultChannel : String
+    lateinit var swearWords: List<String>
     var overwrite : Boolean? = null
     var spyFormat : String? = null
 
     override fun read(){
-
+        val swearWordsList = emptyList<String>().toMutableList()
+        swearWordsList.plus(config.getStringList("Swearwords"))
+        swearWords = swearWordsList
 
         chatProperties = emptyMap<String, Map<String, Any>>().toMutableMap()
 
