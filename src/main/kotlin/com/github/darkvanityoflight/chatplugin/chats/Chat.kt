@@ -14,6 +14,10 @@ abstract class Chat : IChat {
         var form = format
         var message : String = message
 
+        for (word in main.configParser.swearWords){
+            message = message.replace(word,"***")
+        }
+
         if (main.factionsEnabled){
             val fPlayer = FPlayers.getInstance().getByPlayer(sender)
 
@@ -76,6 +80,10 @@ abstract class Chat : IChat {
     override fun assembleMessage(message: String, sender: Player, form: String): String {
         var form = form
         var message : String = message
+
+        for (word in main.configParser.swearWords){
+            message = message.replace(word,"***")
+        }
 
         if (main.factionsEnabled){
             val fPlayer = FPlayers.getInstance().getByPlayer(sender)
