@@ -1,5 +1,4 @@
 name: Ci
-description: Run all tests generate docs and upload builds, test results and docs
 on: push
 
 jobs:
