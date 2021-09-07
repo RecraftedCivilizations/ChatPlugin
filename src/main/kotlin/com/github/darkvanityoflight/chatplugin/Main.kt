@@ -13,7 +13,6 @@ import com.github.darkvanityoflight.chatplugin.listeners.PlayerJoinListener
 import com.github.darkvanityoflight.chatplugin.listeners.ServerLoadListener
 import com.github.darkvanityoflight.chatplugin.parser.ConfigParser
 import com.github.darkvanityoflight.chatplugin.parser.DataParser
-import net.luckperms.api.LuckPerms
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandMap
 import java.io.File
