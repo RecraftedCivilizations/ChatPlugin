@@ -9,7 +9,7 @@ plugins {
 }
 
 group 'com.github.darkvanityoflight'
-version 'v1.6.3'
+version 'v1.7.0'
 
 // plugin.yml values
 def pluginName = 'ChatPlugin'
