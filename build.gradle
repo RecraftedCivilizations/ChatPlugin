@@ -1,79 +1,100 @@
+
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.4.0-rc'
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10'
+    id 'org.jetbrains.dokka' version '1.4.10.2'
     id 'com.github.johnrengelman.shadow' version '2.0.4'
+    id 'ru.endlesscode.bukkitgradle' version '0.8.2'
     id 'maven-publish'
-    id "org.hibernate.build.maven-repo-auth" version "3.0.4"
-    id "ru.endlesscode.bukkitgradle" version "0.8.2"
 }
 
 group 'com.github.darkvanityoflight'
-version '1.6.3'
+version 'v1.7.0'
 
+// plugin.yml values
+def pluginName = 'ChatPlugin'
+def pluginDescription = 'Define different channels to talk in, different channels might have a different range.' +
+        'Define the message format using values from LuckPerms and Factions'
+def pluginAuthors = ["DarkVanityOfLight"]
+
+// Base repos
 repositories {
-    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     mavenCentral()
-    maven {
-        name = "DarkMods"
-        url 'https://repo.repsy.io/mvn/darkvanityoflight/darkmods'
-    }
+    maven { url 'https://repo.repsy.io/mvn/darkvanityoflight/recraftedcivilizations' }
     spigot()
-}
-
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-}
-
-repositories {
     maven { url 'https://jitpack.io' }
+    maven { url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
+}
+// Kotlin stuff
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
+// Minecraft deps
 dependencies {
-    compileOnly "com.github.MilkBowl:VaultAPI:1.7"
-}
-
-dependencies {
-    compileOnly 'net.luckperms:api:5.0'
     compileOnly spigotApi()
-    compileOnly 'com.github.darkvanityoflight:RecraftedCore:2.+'
-    compileOnly fileTree(include: ['*.jar'], dir: 'lib')
+    compileOnly 'com.github.recraftedcivilizations:RecraftedCore:3.+'
 }
 
+dependencies {
+    compileOnly spigotApi()
+    compileOnly fileTree(include: ['*.jar'], dir: 'lib')
+    compileOnly "com.github.MilkBowl:VaultAPI:1.7"
+    compileOnly 'me.clip:placeholderapi:+'
+}
 
+// Test stuff
+test {
+    useJUnitPlatform()
+}
 
+dependencies {
+    testCompile spigotApi()
+    testCompile 'com.github.recraftedcivilizations:RecraftedCore:3.+'
+}
+
+// Jvm Target
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+// plugin.yml
 bukkit {
-
     meta {
-        name = "ChatPlugin"
-        description = 'Define different channels to talk in, different channels might have a different range.' +
-                'Define the message format using values from LuckPerms and Factions'
-        main = "com.github.darkvanityoflight.chatplugin.Main"
-        version = this.version
-        authors = ["DarkVanityOfLight"]
+        name = pluginName
+        description = pluginDescription
+        main = group + '.' + pluginName.toLowerCase() + '.' + pluginName
+        version = version
+        authors = pluginAuthors
     }
 
 }
 
 publishing {
     publications {
-        DarkMod(MavenPublication) {
+        recraftedCore(MavenPublication) {
             groupId = 'com.github.darkvanityoflight'
-            artifactId = rootProject.name
+            artifactId = pluginName
             version = this.version
-
             from components.java
         }
     }
     repositories {
         maven {
-            name = 'DarkMods'
-            url 'https://repo.repsy.io/mvn/darkvanityoflight/darkmods'
+            name = 'RecraftedCivilizations'
+            //credentials(PasswordCredentials)
+            url = 'https://repo.repsy.io/mvn/darkvanityoflight/recraftedcivilizations'
+
+            credentials {
+                username project.RecraftedCivilizationsUsername
+                password project.RecraftedCivilizationsPassword
+            }
         }
     }
 }
 
-compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
-}
+
