@@ -30,9 +30,6 @@ class Main : ARecraftedPlugin() {
     val dataParser : DataParser = DataParser(this)
     lateinit var spyChat: SpyChat
     var factionsEnabled: Boolean = false
-    var luckPermsEnabled: Boolean = false
-    var luckPermApi : LuckPerms? = null
-    var multiverseEnabled : Boolean = false
     var vaultEnabled : Boolean = false
     var economy : Economy? = null
     var papi : Plugin? = null
@@ -45,25 +42,7 @@ class Main : ARecraftedPlugin() {
 
 
         // Check for apis/plugins to use
-        if(Bukkit.getPluginManager().isPluginEnabled("MultiverseCore")){
-            val plugin : Plugin = Bukkit.getServer().pluginManager.getPlugin("MultiverseCore")!!
-            multiverseEnabled = true
-        }
-
         if (Bukkit.getPluginManager().isPluginEnabled("Factions")) factionsEnabled = true
-
-        if (Bukkit.getPluginManager().isPluginEnabled("LuckPerms")){
-            luckPermsEnabled = true
-
-            val luckPermProvider = Bukkit.getServicesManager().getRegistration(
-                LuckPerms::class.java
-            )
-            if (luckPermProvider != null) {
-                luckPermApi = luckPermProvider.provider
-            }else{
-                warning("Could not get the Lucky perm api even though lucky perms is enabled")
-            }
-        }
 
         if (Bukkit.getPluginManager().isPluginEnabled("Vault")){
             vaultEnabled = true
